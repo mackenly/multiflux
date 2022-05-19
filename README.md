@@ -1,5 +1,7 @@
-# Multiflux
+# Multiflux 🎥
 Cloud Multistreaming Platform Powered by Cloudflare Workers
+
+<img src="assets/social.png" alt="Banner image containing the text Multiflux, Cloud Multistreaming Platform Powered by Cloudflare Workers" title="Multiflux Banner Image"><br><br>
 
 **Contents:**
 - [Purpose](README.md#purpose)
