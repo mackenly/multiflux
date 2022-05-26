@@ -23,7 +23,7 @@ export function Message(props) {
                 <h3>{ author_name + " said..." }</h3>
                 <img src={ author_avatar } alt={ author_name + " Avatar" }></img>
                 { isMod ? <img id='mod-label' src={ moderator } alt={ author_name + " Moderator" }></img> : null }
-                <p>${ time.toLocaleTimeString() } - ${ message }</p>
+                <p>{ time.toLocaleTimeString() } - { message }</p>
                 <div className="Chat-item-actions">
                     <button>
                         <img src={ vert_menu } alt="Action Menu"></img>
