@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import copy from '../../assets/copy.svg';
+import copy from '../../../assets/copy.svg';
 
 export function Cloudflare(props) {
     const server = props.server;

@@ -1,8 +1,8 @@
 import { Update } from './Update';
 
-import youtube from '../assets/youtube.svg';
-import facebooklive from '../assets/facebooklive.svg';
-import cfstream from '../assets/cfstream.svg';
+import youtube from '../../assets/youtube.svg';
+import facebooklive from '../../assets/facebooklive.svg';
+import cfstream from '../../assets/cfstream.svg';
 
 const ExampleUpdates = [
     {

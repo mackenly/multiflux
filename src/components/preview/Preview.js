@@ -1,6 +1,4 @@
-import youtube from '../assets/youtube.svg';
-import facebooklive from '../assets/facebooklive.svg';
-import cfstream from '../assets/cfstream.svg';
+import cfstream from '../../assets/cfstream.svg';
 
 export function Preview() {
     return (
@@ -13,8 +11,6 @@ export function Preview() {
                     <h2>Live Preview</h2>
                 </div>
                 <div className="Preview-header-icons">
-                    <img src={youtube} alt="youtube" />
-                    <img src={facebooklive} alt="facebooklive" />
                     <img src={cfstream} alt="cfstream" />
                 </div>
             </div>

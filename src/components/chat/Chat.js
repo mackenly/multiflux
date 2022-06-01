@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Message } from './Message';
 
-import send from '../assets/send.svg';
+import send from '../../assets/send.svg';
 
 const chats = [
     {

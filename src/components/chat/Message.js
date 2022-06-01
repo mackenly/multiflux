@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 
-import vert_menu from '../assets/vert-menu.svg';
-import ban_user from '../assets/ban-user.svg';
-import moderator from '../assets/moderator.svg';
-import mute from '../assets/mute.svg';
-import timeout from '../assets/timeout.svg';
-import user_profile from '../assets/user-profile.svg';
+import vert_menu from '../../assets/vert-menu.svg';
+import ban_user from '../../assets/ban-user.svg';
+import moderator from '../../assets/moderator.svg';
+import mute from '../../assets/mute.svg';
+import timeout from '../../assets/timeout.svg';
+import user_profile from '../../assets/user-profile.svg';
 
 export function Message(props) {
     const { author_name, author_avatar, role, message, datetime } = props;
