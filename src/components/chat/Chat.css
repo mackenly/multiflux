@@ -80,6 +80,29 @@
   background-color: var(--footer-bg-color);
 }
 
+.Chat-empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+}
+
+.Chat-empty-container {
+  width: calc(30% - 20px);
+  padding: 60px 65px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  flex-direction: column;
+  text-align: center;
+  opacity: 0.6;
+}
+
+.Chat-empty img {
+  height: 80px;
+  width: 80px;
+}
+
 .Chat-sender {
   grid-row: 3;
   grid-column: 1;

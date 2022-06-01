@@ -46,13 +46,15 @@ export function Options() {
                     () => {
                         // add a new output to the list
                         setCounter( counter + 1 );
-                        console.log(counter);
                         const newOutput = {
                             id: counter,
                             type: 'rtmp',
                             displayName: 'RTMP',
                             icon: rtmp,
-                            content: <Rtmp />
+                            content: <Rtmp
+                                server="rtmp://rtmp.cloudflarestream.net/" 
+                                serverKey="random" 
+                            />
                         };
                         outputs.push( newOutput );
                         setActive( newOutput );

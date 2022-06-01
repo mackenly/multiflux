@@ -1,49 +1,29 @@
 import { Update } from './Update';
 
-import youtube from '../../assets/youtube.svg';
-import facebooklive from '../../assets/facebooklive.svg';
-import cfstream from '../../assets/cfstream.svg';
-
 const ExampleUpdates = [
     {
-        title: "Facebook Started",
-        desc: "Facebook page Golden Ridge Goalposts has started streaming.",
+        title: "Stream Started",
+        desc: "Recieved a stream from the source.",
         link: "https://www.facebook.com/pg/GoldenRidgeGoalposts/videos/",
-        platform: "facebook",
-        icon: facebooklive,
+        platform: "cloudflare",
+        type: "stream-started",
         datetime: "2020-01-01T00:08:00.000Z"
     },
     {
-        title: "YouTube Started",
-        desc: "YouTube channel Golden Ridge Goalposts has started streaming.",
-        link: "https://www.youtube.com/channel/UC-_X-_X-_X-_X-_X-_X-",
-        platform: "youtube",
-        icon: youtube,
-        datetime: "2020-01-01T00:06:00.000Z"
-    },
-    {
-        title: "Facebook Started",
-        desc: "Facebook page Golden Ridge Goalposts has started streaming.",
+        title: "RTMP Output Added",
+        desc: "Added an RTMP output to the stream.",
         link: "https://www.facebook.com/pg/GoldenRidgeGoalposts/videos/",
-        platform: "facebook",
-        icon: facebooklive,
-        datetime: "2020-01-01T00:07:00.000Z"
+        platform: "rtmp",
+        type: "rtmp-output-added",
+        datetime: "2020-01-01T00:08:00.000Z"
     },
     {
-        title: "YouTube Started",
-        desc: "YouTube channel Golden Ridge Goalposts has started streaming.",
-        link: "https://www.youtube.com/channel/UC-_X-_X-_X-_X-_X-_X-",
-        platform: "youtube",
-        icon: youtube,
-        datetime: "2020-01-01T00:05:00.000Z"
-    },
-    {
-        title: "Facebook Started",
-        desc: "Facebook page Golden Ridge Goalposts has started streaming.",
+        title: "Stream Stopped",
+        desc: "The stream stopped.",
         link: "https://www.facebook.com/pg/GoldenRidgeGoalposts/videos/",
-        platform: "facebook",
-        icon: facebooklive,
-        datetime: "2020-01-01T00:04:00.000Z"
+        platform: "cloudflare",
+        type: "stream-stopped",
+        datetime: "2020-01-01T00:09:00.000Z"
     }
 ];
 
@@ -53,7 +33,7 @@ export function Updates() {
             <h2>Updates</h2>
             <ul>
                 { ExampleUpdates.map( ( message ) => {
-                    return <Update key={ message.datetime + message.title } title={ message.title } desc={ message.desc } link={ message.link } platform={ message.platform } icon={ message.icon } datetime={ message.datetime } />
+                    return <Update key={ message.datetime + message.title } title={ message.title } desc={ message.desc } link={ message.link } platform={ message.platform } type={ message.type } datetime={ message.datetime } />
                 })}
             </ul>
         </div>

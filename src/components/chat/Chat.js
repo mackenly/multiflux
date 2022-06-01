@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { Message } from './Message';
 
 import send from '../../assets/send.svg';
+import calendar from '../../assets/calendar.svg';
 
 const chats = [
-    {
+    /*{
         id: 1,
         author_name: 'George',
         author_avatar: 'https://randomuser.me/api/portraits/men/92.jpg',
@@ -131,7 +132,7 @@ const chats = [
         role: 'default',
         message: 'Prety good, how are you?',
         datetime: '2020-01-01T00:07:00.000Z'
-    }
+    }*/
 ]
 
 export function Chat() {
@@ -146,21 +147,35 @@ export function Chat() {
                 </h2>
             </div>
             <div className="Chat-content">
+                { chats.length > 0 &&
                 <ul>
                     { chats.map( ( chat ) => {
                         return <Message key={ chat.id } author_name={ chat.author_name } author_avatar={ chat.author_avatar } message={ chat.message } datetime={ chat.datetime } role={ chat.role } />
                     })}
                 </ul>
+                }
+                { chats.length === 0 &&
+                    <div className="Chat-empty">
+                        <div className="Chat-empty-container">
+                            <img src={ calendar } alt="Calendar Icon" />
+                            <p>
+                                Coming soon...
+                            </p>
+                        </div>
+                    </div>
+                }
             </div>
-            <div className="Chat-sender">
-                <input 
-                    type="text" 
-                    placeholder="Type a message..."
-                    value={ inputValue }
-                    onChange={ ( e ) => setInputValue( e.target.value ) }
-                />
-                <img src={ send } height="30px" alt="Send Message"></img>
-            </div>
+            { chats.length > 0 &&
+                <div className="Chat-sender">
+                    <input 
+                        type="text" 
+                        placeholder="Type a message..."
+                        value={ inputValue }
+                        onChange={ ( e ) => setInputValue( e.target.value ) }
+                    />
+                    <img src={ send } height="30px" alt="Send Message"></img>
+                </div>
+            }
         </div>
     )
 }
