@@ -39,6 +39,12 @@
   align-self: center;
 }
 
+.srt-header-tab {
+  margin: 0px;
+  width: 40px !important;
+  margin-right: 0px !important;
+}
+
 .Options-tab p {
   padding: 0;
   margin: 0;
@@ -49,6 +55,9 @@
   padding-right: 22px;
   background-color: var(--header-bg-color);
   border: none;
+}
+
+.right-rounded {
   border-radius: 0px 10px 10px 0px;
 }
 
@@ -59,6 +68,11 @@
 
 .Options-tabs-add img {
   height: 28px;
+}
+
+.srt-logo {
+  height: 40px;
+  width: 40px;
 }
 
 .Options-tabs-add p {
@@ -80,20 +94,32 @@
   font-size: calc(4px + 1vmin);
 }
 
+.Options .Status-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.Options .Status-indicator svg {
+  padding-right: 8px;
+  padding-top: 2px;
+}
+
 .Cloudflare,
 .YouTube,
 .Facebook,
-.Rtmp {
+.Rtmp,
+.Srt {
   font-size: calc(4px + 1vmin);
 }
 
-.Cloudflare-server-data label, .Rtmp-server-data label {
+.Cloudflare-server-data label, .Rtmp-server-data label, .Srt-server-data label {
   display: inline-block;
   margin: 10px 0px;
   font-weight: 700;
 }
 
-.Cloudflare-server-data input, .Rtmp-server-data input {
+.Cloudflare-server-data input, .Rtmp-server-data input, .Srt-server-data input {
   flex-grow: 1;
   padding: 10px;
   background-color: transparent;
@@ -107,8 +133,7 @@
 .Cloudflare-options-allowed-origin,
 .Rtmp-server-data-server,
 .Rtmp-server-data-key,
-.Rtmp-options-allowed-origin-adder,
-.Rtmp-options-allowed-origin {
+.Srt-server-data-server {
   width: fit-content;
   padding: 3px;
   display: flex;
@@ -121,12 +146,12 @@
 .Cloudflare-server-data img,
 .Cloudflare-options-allowed-origin-adder img,
 .Rtmp-server-data img,
-.Rtmp-options-allowed-origin-adder img {
+.Srt-server-data img {
   cursor: pointer;
   padding: 0px 5px;
 }
 
-.Cloudflare-server-data span, .Rtmp-server-data span {
+.Cloudflare-server-data span, .Rtmp-server-data span, .Srt-server-data span {
   opacity: 0;
   padding-right: 5px;
   font-weight: 200;
@@ -139,6 +164,6 @@
   transition: opacity 0.5s ease-in-out;
 }
 
-.Cloudflare-options-allowed-origin, .Rtmp-options-allowed-origin {
+.Cloudflare-options-allowed-origin {
   border: none;
 }

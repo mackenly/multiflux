@@ -7,6 +7,12 @@ export function Rtmp(props) {
     const [serverKeyValue, setServerKeyValue] = useState(props.serverKey);
     return (
         <div className="Rtmp">
+            <div className="Status-indicator">
+                <svg height="12" width="12">
+                    <circle cx="6" cy="6" r="6" fill="red" />
+                </svg>
+                <p>Disconnected</p>
+            </div>
             <p>Paste your RTMP server information below.</p>
             <div className="Rtmp-server-data">
                 <label>Server:</label><br />
