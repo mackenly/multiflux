@@ -38,7 +38,6 @@
 .NavLink {
   padding-left: 5px;
   padding-right: 20px;
-  color: white;
 }
 
 .NavLink a {
@@ -46,8 +45,19 @@
   color: var(--header-text-color);
 }
 
-.NavLink a:hover {
+.NavLink a:hover, .NavLink button:hover {
   text-decoration: underline;
+}
+
+.NavLink button {
+  width: fit-content;
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+  color: var(--header-text-color);
+  font-size: calc(8px + 1vmin);
+  font-weight: 100;
+  cursor: pointer;
 }
 
 .App-body {

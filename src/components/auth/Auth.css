@@ -1,0 +1,145 @@
+.Auth {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+}
+
+.Auth-box {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.2fr 1fr;
+  width: min(400px, 80%);
+  height: min(400px, 80%);
+  background-color: var(--content-body-box-bg);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.Auth-box-header {
+  color: var(--header-text-color);
+  text-align: center;
+}
+
+.Auth-box-content {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+.Auth-Logout, .Auth-Login, .Auth-Select, .Auth-Create {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 0.2fr;
+    align-items: center;
+    justify-items: center;
+}
+
+.Auth-Login-Container, .Auth-Create-Container {
+    width: 89%;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+.Auth-Select-Container {
+    width: 89%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+}
+
+.Auth-form {
+    width: 100%;
+}
+
+.Auth-form label {
+  display: inline-block;
+  margin: 10px 0px;
+  font-weight: 700;
+  font-size: calc(2px + 1vmin);
+}
+
+.Auth-form input, .Auth-form select {
+  flex-grow: 1;
+  padding: 10px;
+  background-color: transparent;
+  border: none;
+  color: var(--content-disabled-color);
+}
+
+.Auth-form select:focus {
+  color: rgb(92, 92, 92);
+}
+
+.Auth-form-email,
+.Auth-form-key,
+.Auth-form-name,
+.Auth-form-save,
+.Auth-form-stream {
+  width: 100%;
+  padding: 3px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid var(--content-body-color);
+  border-radius: 5px;
+}
+
+.Auth-form img {
+  cursor: pointer;
+  padding: 0px 5px;
+}
+
+.Auth-form span {
+  opacity: 0;
+  padding-right: 5px;
+  font-weight: 200;
+  font-size: calc(1px + 1vmin);
+  transition: opacity 0.5s ease-in-out;
+}
+
+.show {
+  opacity: 1 !important;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.Auth button {
+    width: 90%;
+    padding: 10px;
+    background-color: var(--content-link-color);
+    border: none;
+    color: var(--content-body-color);
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#Auth-Select-Add, #Auth-Logout-Cancel {
+    background: none;
+    color: var(--content-link-color);
+    text-decoration: underline;
+    padding: 15px 0px;
+}
+
+#Auth-Select-Use {
+    width: 100%;
+    margin: 10px 0px 5px 0px;
+}
+
+#Auth-Create-Add {
+    width: 100%;
+    background-color: #F38020;
+    margin: 10px 0px 5px 0px;
+}

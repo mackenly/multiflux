@@ -30,6 +30,9 @@ export function Footer() {
                 Found an issue?
             </GitHubButton>
             <p>
+                CloudFlare™ is a registered trademark of CloudFlare, Inc. which is not affiliated with this project.
+            </p>
+            <p>
                 Copyright &copy; {new Date().getFullYear()} Mackenly Jones. <a 
                 href="https://github.com/mackenly/multiflux/blob/main/LICENSE" 
                 target="_blank" rel="noopener noreferrer">See license here.</a>

@@ -21,13 +21,13 @@ export function Srt(props) {
                         navigator.clipboard.readText().then(text => {
                             setServerValue(text.trim());
                         });
-                        document.getElementById('server-copied').classList.add('show');
+                        document.getElementById('server-pasted').classList.add('show');
                         setTimeout(() => {
-                            document.getElementById('server-copied').classList.remove('show');
+                            document.getElementById('server-pasted').classList.remove('show');
                         }, 2000);
                     }} />
                 </div>
-                <span id='server-copied'>Pasted 🦾</span><br />
+                <span id='server-pasted'>Pasted 🦾</span><br />
             </div>
         </div>
     )

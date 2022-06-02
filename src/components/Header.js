@@ -12,9 +12,24 @@ export function Header() {
                 </div>
                 <nav className='nav-container'>
                     <NavLink label="Docs" path="https://github.com/mackenly/multiflux" />
-                    <NavLink label="Logout" path="/logout" />
+                    <div className="NavLink">
+                        <button onClick={
+                            sessionStorage.getItem('isSelecting') === 'false' ? toggleSelecting : () => {}
+                        }>
+                            Select Stream
+                        </button>
+                    </div>
                 </nav>
             </header>
         </>
     )
+}
+
+function toggleSelecting() {
+    if (sessionStorage.getItem('isSelecting') === 'false') {
+        sessionStorage.setItem('isSelecting', 'true');
+    } else {
+        sessionStorage.setItem('isSelecting', 'false');
+    }
+    window.location.reload();
 }
