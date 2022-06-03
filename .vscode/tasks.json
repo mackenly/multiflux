@@ -16,6 +16,22 @@
             "runOptions": {
                 "runOn": "folderOpen",
             }
+        },
+        {
+            "label": "Start Wrangler",
+            "type": "shell",
+            "command": "wrangler pages dev -- npx react-scripts start",
+            "windows": {
+                "command": "wrangler pages dev -- npx react-scripts start"
+            },
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "runOptions": {
+                "runOn": "folderOpen",
+            }
         }
     ]
 }
