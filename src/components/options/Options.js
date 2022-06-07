@@ -78,7 +78,6 @@ export function Options(streamData, streamOutputs) {
             }
         };
         const response = await fetch(`/api/streams/live_inputs/${JSON.parse(sessionStorage.getItem("selectedStream")).uid}/outputs`, init);
-        console.log(response);
         const data = await response.json();
         console.log(data);
         const out = data.result.map(output => {
@@ -95,6 +94,7 @@ export function Options(streamData, streamOutputs) {
             }
         }
         );
+        console.log(out);
         setOutputs([{
             id: 1,
             type: 'cloudflare',
@@ -151,8 +151,9 @@ export function Options(streamData, streamOutputs) {
                             displayName: 'RTMP',
                             icon: rtmp,
                             content: <Rtmp
-                                streamData={streamData}
-                                streamOutputs={streamOutputs}
+                                id={counter}
+                                url=""
+                                streamKey=""
                             />
                         };
                         setOutputs( [...outputs, newOutput] );
