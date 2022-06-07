@@ -7,36 +7,55 @@
 // the Business Source License, use of this software will be governed
 // by the GNU AFFERO GENERAL PUBLIC LICENSE 3.0.
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import { Header } from './components/Header';
-import { Auth } from './components/auth/Auth';
-import { Preview } from './components/preview/Preview';
-import { Options } from './components/options/Options';
-import { Chat } from './components/chat/Chat';
-import { Updates } from './components/updates/Updates';
-import { Footer } from './components/Footer';
-import './App.css';
-import './components/auth/Auth.css';
-import './components/options/Options.css';
-import './components/chat/Chat.css';
-import './components/updates/Updates.css';
-import './components/preview/Preview.css';
+import { Header } from "./components/Header";
+import { Auth } from "./components/auth/Auth";
+import { Preview } from "./components/preview/Preview";
+import { Options } from "./components/options/Options";
+import { Chat } from "./components/chat/Chat";
+import { Updates } from "./components/updates/Updates";
+import { Footer } from "./components/Footer";
+import "./App.css";
+import "./components/auth/Auth.css";
+import "./components/options/Options.css";
+import "./components/chat/Chat.css";
+import "./components/updates/Updates.css";
+import "./components/preview/Preview.css";
 
 function App() {
   const [stream, setStream] = useState(null);
   const [streamData, setStreamData] = useState(null);
   const [streamOutputs, setStreamOutputs] = useState(null);
-    useEffect(() => {
-        const selectedStream = JSON.parse(sessionStorage.getItem('selectedStream'));
-        const selectedStreamData = JSON.parse(sessionStorage.getItem('streamData'));
-        const selectedStreamOutputs = JSON.parse(sessionStorage.getItem('streamOutputs'));
-        if (selectedStream !== null && selectedStream !== undefined && selectedStreamData !== null && selectedStreamData !== undefined && selectedStreamOutputs !== null && selectedStreamOutputs !== undefined) {
+  useEffect(() => {
+    if (sessionStorage.getItem("selectedStream")) {
+      const selectedStream = JSON.parse(
+        sessionStorage.getItem("selectedStream")
+      );
+      if (sessionStorage.getItem("streamData")) {
+        const selectedStreamData = JSON.parse(
+          sessionStorage.getItem("streamData")
+        );
+        if (sessionStorage.getItem("streamOutputs")) {
+          const selectedStreamOutputs = JSON.parse(
+            sessionStorage.getItem("streamOutputs")
+          );
+          if (
+            selectedStream !== null &&
+            selectedStream !== undefined &&
+            selectedStreamData !== null &&
+            selectedStreamData !== undefined &&
+            selectedStreamOutputs !== null &&
+            selectedStreamOutputs !== undefined
+          ) {
             setStream(selectedStream);
             setStreamData(selectedStreamData);
             setStreamOutputs(selectedStreamOutputs);
+          }
         }
-    });
+      }
+    }
+  });
   return (
     <div className="App">
       <Auth />
