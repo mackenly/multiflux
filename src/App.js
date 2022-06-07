@@ -48,11 +48,10 @@ function App() {
       setStreamOutputs(selectedStreamOutputs);
     }
   }
-  updateStuff();
 
   useEffect(() => {
     updateStuff();
-  }, [stream, streamData, streamOutputs]);
+  });
   return (
     <div className="App">
       <Auth />
