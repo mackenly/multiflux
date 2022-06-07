@@ -19,9 +19,8 @@ export function Cloudflare(props) {
         const interval = setInterval(() => {
             try {
                 const data = JSON.parse(sessionStorage.getItem("streamData")).result;
-                setServer(data.meta.name);
-                const data2 = JSON.parse(sessionStorage.getItem("streamOutputs")).result[0];
-                setServerKey(data2.uid);
+                setServer(data.rtmps.url);
+                setServerKey(data.rtmps.streamKey);
             } catch (e) {}
         }
         , 1000);
