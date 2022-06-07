@@ -27,6 +27,7 @@ function App() {
   const [stream, setStream] = useState(null);
   const [streamData, setStreamData] = useState(null);
   const [streamOutputs, setStreamOutputs] = useState(null);
+  const [dashContent, setDashContent] = useState(null);
 
   function updateStuff() {
     if (sessionStorage.getItem("selectedStream") !== undefined) {
@@ -51,22 +52,24 @@ function App() {
 
   useEffect(() => {
     updateStuff();
+    setDashContent(
+      <>
+        <Preview streamData={streamData} streamOutputs={streamOutputs} />
+        <Options streamData={streamData} streamOutputs={streamOutputs} />
+        <Chat />
+        <Updates />
+      </>
+    );
     console.log(stream, streamData, streamOutputs);
-  });
+  }, []);
+
   return (
     <div className="App">
       <Auth />
       <Header className="App-header" />
       <main className="App-body">
         {
-          stream !== null && streamData !== null && streamOutputs !== null ? (
-            <>
-              <Preview streamData={streamData} streamOutputs={streamOutputs} />
-              <Options streamData={streamData} streamOutputs={streamOutputs} />
-              <Chat />
-              <Updates />
-              </>
-            ) : <div>Loading...</div>
+          stream !== null && streamData !== null && streamOutputs !== null ? dashContent : <></>
         }
       </main>
       <footer className="App-footer">
