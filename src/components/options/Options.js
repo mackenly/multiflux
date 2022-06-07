@@ -124,12 +124,6 @@ export function Options() {
         }, ...out]);
     }
 
-    function handleTick(){
-        if (outputs.length < 2) {
-            
-        }
-    }
-
     useEffect(function () {
         // update every second
         const interval = setInterval(() => {
@@ -146,8 +140,6 @@ export function Options() {
             clearInterval(interval);
         }
     }, [outputs.length]);
-
-
 
     return (
         <div className="Options">
@@ -253,7 +245,22 @@ export function Options() {
                 }
             >Add Output</button>
             }
-            
+            { active.id.toString().length > 3 &&
+                <button onClick={
+                    () => {
+                        const oldId = active.id;
+                        const url = document.getElementById(active.id + "-url").value;
+                        const streamKey = document.getElementById(active.id + "-key").value;
+                        try {
+                            removeOutput(oldId);
+                            addOutput(url, streamKey);
+                        } catch (e) {
+                            console.error(e);
+                        }
+                    }
+                }
+            >Update Output</button>
+            }
         </div>
     )
 }
