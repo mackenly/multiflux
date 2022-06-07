@@ -34,15 +34,20 @@ export function Options(streamData, streamOutputs) {
     const [active, setActive] = useState(outputs[0]);
     const [counter, setCounter] = useState(outputs.length);
 
-    /*async function addOutput(type) {
+    async function addOutput(url, streamKey) {
         const init = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
-            }
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+                "account-id": JSON.parse(sessionStorage.getItem('selectedAccount')).id,
+            },
+            body: JSON.stringify({
+                url: url,
+                streamKey: streamKey,
+            }),
         };
-        const response = await fetch('/api/outputs', init);
+        const response = await fetch(`/api/streams/live_inputs/${JSON.parse(sessionStorage.getItem("selectedStream")).uid}/outputs`, init);
         const body = await response.json();
         if (response.status === 401) {
             throw new Error("Unauthorized");
@@ -50,13 +55,18 @@ export function Options(streamData, streamOutputs) {
             throw new Error(body);
         }
         setOutputs([...outputs, {
-            id: body.id,
-            type: type,
-            displayName: type,
-            icon: type === 'cloudflare' ? cfstream : type === 'rtmp' ? rtmp : srt,
+            id: body.result.uid,
+            type: 'rtmp',
+            displayName: 'RTMP',
+            icon: rtmp,
+            content: <Rtmp
+                id={body.result.uid}
+                url={body.result.url}
+                streamKey={body.result.streamKey}
+            />
         }]);
         setActive(outputs[outputs.length - 1]);
-    }*/
+    }
 
     async function getOutputs() {
         const init = {
@@ -78,8 +88,10 @@ export function Options(streamData, streamOutputs) {
                 displayName: 'RTMP',
                 icon: rtmp,
                 content: <Rtmp
-                    outputData={output}
-                />
+                    id={output.uid}
+                    url={output.url}
+                    streamKey={output.streamKey}
+            />
             }
         }
         );
@@ -103,7 +115,7 @@ export function Options(streamData, streamOutputs) {
                 console.log(outputs);
             } catch (e) { }
         }
-        , 1000);
+        , 10000);
         return () => clearInterval(interval);
     }, []);
 

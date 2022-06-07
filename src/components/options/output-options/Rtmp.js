@@ -11,9 +11,9 @@ import { useState } from 'react';
 
 import paste from '../../../assets/paste.svg';
 
-export function Rtmp(props) {
-    const [serverValue, setServerValue] = useState("");
-    const [serverKeyValue, setServerKeyValue] = useState("");
+export function Rtmp(id, url, streamKey) {
+    const [serverValue, setServerValue] = useState(url);
+    const [serverKeyValue, setServerKeyValue] = useState(streamKey);
     return (
         <div className="Rtmp">
             <div className="Status-indicator">
