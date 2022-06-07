@@ -42,33 +42,30 @@ export function Preview() {
   }
 
   useEffect(() => {
-    try {
-      if (
-        sessionStorage.getItem("key") !== null &&
-        sessionStorage.getItem("selectedAccount") !== null &&
-        sessionStorage.getItem("selectedStream") !== null
-      ) {
-        const key = sessionStorage.getItem("key");
-        const id = JSON.parse(sessionStorage.getItem("selectedAccount")).id;
-        const uid = JSON.parse(sessionStorage.getItem("selectedStream")).uid;
-        if (key && id && uid) {
-          getStreamOutputs(key, id, uid).then((streamOutputs) => {
-            setStreamId(streamOutputs.result[0].uid);
-          });
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, [streamingState]);
-
-  useEffect(() => {
     // update every 5 seconds
     const interval = setInterval(() => {
       try {
         const data = JSON.parse(sessionStorage.getItem("streamData"));
         //const outs = JSON.parse(sessionStorage.getItem("streamOutputs"));
         setStreamName("- " + data.result.meta.name);
+        if (data.result.status.current.state !== streamingState) {
+          if (
+            sessionStorage.getItem("key") !== null &&
+            sessionStorage.getItem("selectedAccount") !== null &&
+            sessionStorage.getItem("selectedStream") !== null
+          ) {
+            const key = sessionStorage.getItem("key");
+            const id = JSON.parse(sessionStorage.getItem("selectedAccount")).id;
+            const uid = JSON.parse(
+              sessionStorage.getItem("selectedStream")
+            ).uid;
+            if (key && id && uid) {
+              getStreamOutputs(key, id, uid).then((streamOutputs) => {
+                setStreamId(streamOutputs.result[0].uid);
+              });
+            }
+          }
+        }
         setStreamingState(data.result.status.current.state);
         console.log(data.result.status.current.state);
       } catch (e) {
