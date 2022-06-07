@@ -7,13 +7,26 @@
 // the Business Source License, use of this software will be governed
 // by the GNU AFFERO GENERAL PUBLIC LICENSE 3.0.
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import paste from '../../../assets/paste.svg';
 
 export function Rtmp(id, url, streamKey) {
-    const [serverValue, setServerValue] = useState(url);
-    const [serverKeyValue, setServerKeyValue] = useState(streamKey);
+    const [serverValue, setServerValue] = useState("");
+    const [serverKeyValue, setServerKeyValue] = useState("");
+
+    useEffect(() => {
+        if (url) {
+            setServerValue(url);
+        }
+    }, [url]);
+
+    useEffect(() => {
+        if (streamKey) {
+            setServerKeyValue(streamKey);
+        }
+    }, [streamKey]);
+
     return (
         <div className="Rtmp">
             <div className="Status-indicator">

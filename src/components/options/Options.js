@@ -100,10 +100,7 @@ export function Options(streamData, streamOutputs) {
             type: 'cloudflare',
             displayName: 'Cloudflare',
             icon: cfstream,
-            content: <Cloudflare 
-                streamData={streamData}
-                streamOutputs={streamOutputs}
-            />,
+            content: <Cloudflare />,
         }, ...out]);
     }
 
