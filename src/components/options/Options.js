@@ -36,7 +36,7 @@ export function Options() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+                'Authorization': 'Bearer ' + sessionStorage.getItem('key'),
                 "account-id": JSON.parse(sessionStorage.getItem('selectedAccount')).id,
             },
             body: JSON.stringify({
@@ -70,7 +70,7 @@ export function Options() {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+                'Authorization': 'Bearer ' + sessionStorage.getItem('key'),
                 "account-id": JSON.parse(sessionStorage.getItem('selectedAccount')).id,
             },
         };
