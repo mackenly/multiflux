@@ -78,12 +78,14 @@ function App() {
           JSON.parse(sessionStorage.getItem("selectedAccount")).id,
           JSON.parse(sessionStorage.getItem("selectedStream")).uid
         );
+        console.log(updatedStreamOutputs);
         sessionStorage.setItem("streamOutputs", JSON.stringify(updatedStreamOutputs));
         const updatedStreamData = getStreamData(
           sessionStorage.getItem("key"),
           JSON.parse(sessionStorage.getItem("selectedAccount")).id,
           JSON.parse(sessionStorage.getItem("selectedStream")).uid
         );
+        console.log(updatedStreamData);
         sessionStorage.setItem("streamData", JSON.stringify(updatedStreamData));
       } catch (e) {
         console.error(e);
