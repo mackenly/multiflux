@@ -26,15 +26,6 @@ export function Cloudflare(props) {
         , 1000);
         return () => clearInterval(interval);
     }, []);
-
-    useEffect(() => {
-        if (props.streamData.result) {
-            setServer(props.streamData.result.rtmps.url);
-        }
-        if (props.streamOutputs.result) {
-            setServerKey(props.streamData.result.rtmps.streamKey);
-        }
-    }, [props.streamData, props.streamOutputs]);
     
     return (
         <div className="Cloudflare">
