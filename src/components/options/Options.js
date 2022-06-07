@@ -18,17 +18,14 @@ import srt from '../../assets/srt.svg';
 import add from '../../assets/add.svg';
 import remove from '../../assets/remove.svg';
 
-export function Options(streamData, streamOutputs) {
+export function Options() {
     const [outputs, setOutputs] = useState([
         {
             id: 1,
             type: 'cloudflare',
             displayName: 'Cloudflare',
             icon: cfstream,
-            content: <Cloudflare 
-                streamData={streamData}
-                streamOutputs={streamOutputs}
-            />,
+            content: <Cloudflare />,
         },
     ]);
     const [active, setActive] = useState(outputs[0]);
