@@ -55,16 +55,22 @@ function App() {
         }
       }
     }
-  });
+  }, [stream, streamData, streamOutputs]);
   return (
     <div className="App">
       <Auth />
       <Header className="App-header" />
       <main className="App-body">
-        <Preview streamData={streamData} streamOutputs={streamOutputs} />
-        <Options streamData={streamData} streamOutputs={streamOutputs} />
-        <Chat />
-        <Updates />
+        {
+          stream !== null && stream !== undefined && streamData !== null && streamData !== undefined && streamOutputs !== null && streamOutputs !== undefined ? (
+            <>
+              <Preview streamData={streamData} streamOutputs={streamOutputs} />
+              <Options streamData={streamData} streamOutputs={streamOutputs} />
+              <Chat />
+              <Updates />
+              </>
+            ) : <div>Loading...</div>
+        }
       </main>
       <footer className="App-footer">
         <Footer />
