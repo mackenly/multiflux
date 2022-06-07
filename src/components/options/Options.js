@@ -239,7 +239,7 @@ export function Options() {
             <>
                 { active.content }
             </>
-            { active.id < 1000 &&
+            { active.id < 1000 && active.id !== 1 &&
                 <button onClick={
                     () => {
                         const url = document.getElementById(active.id + "-url").value;
