@@ -27,50 +27,65 @@ function App() {
   const [stream, setStream] = useState(null);
   const [streamData, setStreamData] = useState(null);
   const [streamOutputs, setStreamOutputs] = useState(null);
-  const [dashContent, setDashContent] = useState(null);
 
   function updateStuff() {
+    const updated = false;
     if (sessionStorage.getItem("selectedStream") !== undefined) {
       const selectedStream = JSON.parse(
         sessionStorage.getItem("selectedStream")
       );
       setStream(selectedStream);
+      updated = true;
     }
     if (sessionStorage.getItem("streamData") !== undefined) {
       const selectedStreamData = JSON.parse(
         sessionStorage.getItem("streamData")
       );
       setStreamData(selectedStreamData);
+      updated = updated && true;
     }
     if (sessionStorage.getItem("streamOutputs") !== undefined) {
       const selectedStreamOutputs = JSON.parse(
         sessionStorage.getItem("streamOutputs")
       );
       setStreamOutputs(selectedStreamOutputs);
+      updated = updated && true;
     }
+    console.log(stream, streamData, streamOutputs);
+    return updated;
   }
 
+  // check every second for updates
   useEffect(() => {
-    updateStuff();
-    setDashContent(
-      <>
-        <Preview streamData={streamData} streamOutputs={streamOutputs} />
-        <Options streamData={streamData} streamOutputs={streamOutputs} />
-        <Chat />
-        <Updates />
-      </>
-    );
-    console.log(stream, streamData, streamOutputs);
-  }, []);
+    const interval = setInterval(() => {
+      const check = updateStuff();
+      if (check) {
+        console.log("updated");
+        clearInterval(interval);
+        return;
+      }
+    }
+    , 1000);
+  }
+  , []);
 
   return (
     <div className="App">
       <Auth />
       <Header className="App-header" />
       <main className="App-body">
-        {
-          stream !== null && streamData !== null && streamOutputs !== null ? dashContent : <></>
-        }
+        { streamData !== null && streamOutputs !== null ? (
+          <>
+            <Preview streamData={streamData} streamOutputs={streamOutputs} />
+            <Options streamData={streamData} streamOutputs={streamOutputs} />
+            <Chat />
+            <Updates />
+          </>
+        ) : (
+          <div className="App-loading">
+            <p>Loading...</p>
+          </div>
+        )}
       </main>
       <footer className="App-footer">
         <Footer />

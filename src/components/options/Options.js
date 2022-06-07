@@ -55,7 +55,7 @@ export function Options(streamData, streamOutputs) {
                     );
                 }
                 )}
-                <button className="Options-tabs-add" onClick={
+                <button className="Options-tabs-add right-rounded" onClick={
                     () => {
                         // add a new output to the list
                         setCounter( counter + 1 );
@@ -76,28 +76,32 @@ export function Options(streamData, streamOutputs) {
                     <img src={ add } alt="Add Icon" />
                     <p>Add RTMP</p>
                 </button>
-                <button className="Options-tabs-add right-rounded" onClick={
-                    () => {
-                        // add a new output to the list
-                        setCounter( counter + 1 );
-                        const newOutput = {
-                            id: counter,
-                            type: 'srt',
-                            displayName: 'SRT',
-                            icon: srt,
-                            content: <Srt
-                                streamData={streamData}
-                                streamOutputs={streamOutputs}
-                            />
-                        };
-                        setOutputs( [...outputs, newOutput] );
-                        setActive( newOutput );
-                    }
-                }>
-                    <img src={ add } alt="Add Icon" />
-                    <p>Add</p>
-                    <img src={ srt } className="srt-logo" alt="SRT" />
-                </button>
+                {
+                    /*
+                    <button className="Options-tabs-add right-rounded" onClick={
+                        () => {
+                            // add a new output to the list
+                            setCounter( counter + 1 );
+                            const newOutput = {
+                                id: counter,
+                                type: 'srt',
+                                displayName: 'SRT',
+                                icon: srt,
+                                content: <Srt
+                                    streamData={streamData}
+                                    streamOutputs={streamOutputs}
+                                />
+                            };
+                            setOutputs( [...outputs, newOutput] );
+                            setActive( newOutput );
+                        }
+                    }>
+                        <img src={ add } alt="Add Icon" />
+                        <p>Add</p>
+                        <img src={ srt } className="srt-logo" alt="SRT" />
+                    </button>
+                */
+                }
             </div>
             <div className="Options-content-header">
                 <h3>{ active.displayName }</h3>
