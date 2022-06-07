@@ -27,6 +27,7 @@ function App() {
   const [stream, setStream] = useState(null);
   const [streamData, setStreamData] = useState(null);
   const [streamOutputs, setStreamOutputs] = useState(null);
+  const [streamValid, setStreamValid] = useState(false);
 
   function updateStuff() {
     var updated = false;
@@ -61,8 +62,9 @@ function App() {
       const check = updateStuff();
       if (check) {
         console.log("updated");
-        clearInterval(interval);
-        return;
+        setStreamValid(true);
+      } else {
+        setStreamValid(false);
       }
     }
     , 1000);
@@ -74,7 +76,7 @@ function App() {
       <Auth />
       <Header className="App-header" />
       <main className="App-body">
-        { stream !== null && streamData !== null && streamOutputs !== null ? (
+        { streamValid && stream !== null && streamData !== null && streamOutputs !== null ? (
           <>
             <Preview streamData={streamData} streamOutputs={streamOutputs} />
             <Options streamData={streamData} streamOutputs={streamOutputs} />
