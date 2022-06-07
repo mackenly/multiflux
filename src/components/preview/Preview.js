@@ -27,7 +27,10 @@ export function Preview() {
         setStreamName("- " + data.result.meta.name);
         setStreamId(outs.result[0].uid);
         setStreamingState(data.result.status.current.state);
-      } catch (e) {}
+        console.log(data.result.status.current.state);
+      } catch (e) {
+        console.error(e);
+      }
     }, 5000);
     return () => clearInterval(interval);
   }, []);
