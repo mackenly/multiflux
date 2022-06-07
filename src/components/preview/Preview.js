@@ -51,7 +51,7 @@ export function Preview() {
       </div>
       <div className="Preview-content">
         {streamingState === "connected" ? (
-          <Stream controls autoplay responsive src={streamId} width="100%" />
+          <Stream controls autoplay responsive src={streamId} />
         ) : (
           <div className="notStreaming">
             <p>{streamingState}...</p>
