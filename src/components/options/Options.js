@@ -34,6 +34,30 @@ export function Options(streamData, streamOutputs) {
     const [active, setActive] = useState(outputs[0]);
     const [counter, setCounter] = useState(outputs.length);
 
+    /*async function addOutput(type) {
+        const init = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+            }
+        };
+        const response = await fetch('/api/outputs', init);
+        const body = await response.json();
+        if (response.status === 401) {
+            throw new Error("Unauthorized");
+        } else if (response.status !== 200) {
+            throw new Error(body);
+        }
+        setOutputs([...outputs, {
+            id: body.id,
+            type: type,
+            displayName: type,
+            icon: type === 'cloudflare' ? cfstream : type === 'rtmp' ? rtmp : srt,
+        }]);
+        setActive(outputs[outputs.length - 1]);
+    }*/
+
     async function getOutputs() {
         const init = {
             method: 'GET',
@@ -44,7 +68,9 @@ export function Options(streamData, streamOutputs) {
             }
         };
         const response = await fetch(`/api/streams/live_inputs/${JSON.parse(sessionStorage.getItem("selectedStream")).uid}/outputs`, init);
+        console.log(response);
         const data = await response.json();
+        console.log(data);
         const out = data.result.map(output => {
             return {
                 id: output.uid,
