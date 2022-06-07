@@ -19,12 +19,14 @@ export function Rtmp(id, url, streamKey) {
         if (url) {
             setServerValue(url);
         }
+        console.log(url);
     }, [url]);
 
     useEffect(() => {
         if (streamKey) {
             setServerKeyValue(streamKey);
         }
+        console.log(streamKey);
     }, [streamKey]);
 
     return (
