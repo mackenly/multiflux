@@ -53,7 +53,11 @@ export function Preview() {
           <h2>Live Preview {streamName}</h2>
         </div>
         <div className="Preview-header-icons">
-          <img src={cfstream} alt="cfstream" />
+          {streamingState === "connected" ? (
+            <img src={cfstream} alt="cfstream" />
+          ) : (
+              null
+          )}
         </div>
       </div>
       <div className="Preview-content">
@@ -61,7 +65,7 @@ export function Preview() {
           <Stream controls autoplay src={streamId} />
         ) : (
           <div className="notStreaming">
-            <p>{ streamingState }...</p>
+            <p>{streamingState}...</p>
           </div>
         )}
       </div>
