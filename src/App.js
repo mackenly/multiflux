@@ -36,7 +36,7 @@ function App() {
             setStreamData(selectedStreamData);
             setStreamOutputs(selectedStreamOutputs);
         }
-    }, []);
+    });
   return (
     <div className="App">
       <Auth />

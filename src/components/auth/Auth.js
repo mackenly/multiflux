@@ -449,7 +449,7 @@ function Select(props) {
                           JSON.stringify(streamOutputs)
                         );
                         sessionStorage.setItem("isSelecting", false);
-                        //window.location.reload();
+                        window.location.reload();
                       })
                       .catch((err) => {
                         throw Error("Stream outputs failed");
