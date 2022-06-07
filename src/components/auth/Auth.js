@@ -417,40 +417,44 @@ function Select(props) {
           id="Auth-Select-Use"
           onClick={() => {
             console.log("Stream selected: " + selectedStream);
-            if (
-              selectedStream.uid !== undefined &&
-              selectedStream.uid !== null
-            ) {
-              getStreamData(
-                sessionStorage.getItem("key"),
-                selectedAccount.id,
-                selectedStream.uid
-              )
-                .then((streamData) => {
-                  getStreamOutputs(
-                    sessionStorage.getItem("key"),
-                    selectedAccount.id,
-                    selectedStream.uid
-                  )
-                    .then((streamOutputs) => {
-                      sessionStorage.setItem(
-                        "streamData",
-                        JSON.stringify(streamData)
-                      );
-                      sessionStorage.setItem(
-                        "streamOutputs",
-                        JSON.stringify(streamOutputs)
-                      );
-                      sessionStorage.setItem("isSelecting", false);
-                      window.location.reload();
-                    })
-                    .catch((err) => {
-                      throw Error("Stream outputs failed");
-                    });
-                })
-                .catch((err) => {
-                  throw Error("Stream data failed");
-                });
+            try {
+              if (
+                selectedStream.uid !== undefined &&
+                selectedStream.uid !== null
+              ) {
+                getStreamData(
+                  sessionStorage.getItem("key"),
+                  selectedAccount.id,
+                  selectedStream.uid
+                )
+                  .then((streamData) => {
+                    getStreamOutputs(
+                      sessionStorage.getItem("key"),
+                      selectedAccount.id,
+                      selectedStream.uid
+                    )
+                      .then((streamOutputs) => {
+                        sessionStorage.setItem(
+                          "streamData",
+                          JSON.stringify(streamData)
+                        );
+                        sessionStorage.setItem(
+                          "streamOutputs",
+                          JSON.stringify(streamOutputs)
+                        );
+                        sessionStorage.setItem("isSelecting", false);
+                        window.location.reload();
+                      })
+                      .catch((err) => {
+                        throw Error("Stream outputs failed");
+                      });
+                  })
+                  .catch((err) => {
+                    throw Error("Stream data failed");
+                  });
+              }
+            } catch (error) {
+              console.error(error.message);
             }
           }}
         >
