@@ -227,7 +227,11 @@ export function Options() {
                     <img src={ remove } height="30px" title={"Remove " + active.displayName} alt={ "Remove " + active.displayName } onClick={
                         () => {
                             // delete the output
-                            removeOutput( active.id );
+                            if ( active.id > 1000 ) {
+                                removeOutput( active.id );
+                            } else {
+                                setOutputs( outputs.filter( output => output.id !== active.id ) );
+                            }
                         }
                     } />
                 }
@@ -235,7 +239,8 @@ export function Options() {
             <>
                 { active.content }
             </>
-            <button onClick={
+            { active.id < 1000 &&
+                <button onClick={
                     () => {
                         const url = document.getElementById(active.id + "-url").value;
                         const streamKey = document.getElementById(active.id + "-key").value;
@@ -243,6 +248,8 @@ export function Options() {
                     }
                 }
             >Add Output</button>
+            }
+            
         </div>
     )
 }
