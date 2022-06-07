@@ -122,20 +122,30 @@ export function Options() {
 
     function handleTick(){
         if (outputs.length < 2) {
-            getOutputs();
+            
         }
     }
 
-    useEffect(() => {
+    useEffect(function () {
         // update every second
         const interval = setInterval(() => {
             try {
-                handleTick();
-            } catch (e) { }
+                if (outputs.length < 2) {
+                    getOutputs();
+                }
+            } catch (e) {
+                console.error(e);
+            }
         }
         , 2000);
-        return () => clearInterval(interval);
+        return function cleanup() {
+            clearInterval(interval);
+        }
     }, []);
+    
+    useEffect(() => {
+        getOutputs();
+    }, [outputs]);
 
 
     return (
