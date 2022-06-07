@@ -14,7 +14,7 @@ import { Options } from '../Options';
 
 export function Rtmp(props) {
     const [serverValue, setServerValue] = useState(props.url);
-    const [serverKeyValue, setServerKeyValue] = useState(props.Key);
+    const [serverKeyValue, setServerKeyValue] = useState(props.streamKey);
 
     return (
         <div className="Rtmp">

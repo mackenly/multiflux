@@ -63,6 +63,7 @@ export function Options() {
                 status={body.result.status}
             />
         }]);
+        getOutputs();
         setActive(outputs[outputs.length - 1]);
     }
 
