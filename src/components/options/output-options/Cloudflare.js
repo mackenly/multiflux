@@ -7,15 +7,25 @@
 // the Business Source License, use of this software will be governed
 // by the GNU AFFERO GENERAL PUBLIC LICENSE 3.0.
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import copy from '../../../assets/copy.svg';
 
 export function Cloudflare(props) {
-    const server = props.server;
-    const serverKey = props.serverKey;
+    const [server, setServer] = useState("");
+    const [serverKey, setServerKey] = useState("");
     const [saveRecording, setSaveRecording] = useState(props.saveRecording);
     const [requireSignedUrls, setRequireSignedUrls] = useState(props.requireSignedUrls);
+
+    useEffect(() => {
+        if (props.streamData.result) {
+            setServer(props.streamData.result.rtmps.url);
+        }
+        if (props.streamOutputs.result) {
+            setServerKey(props.streamData.result.rtmps.streamKey);
+        }
+    }, [props.streamData, props.streamOutputs]);
+    
     return (
         <div className="Cloudflare">
             <p>Using your encoding software send an RTMP feed to Cloudflare Stream using the following server information:</p>
@@ -44,6 +54,7 @@ export function Cloudflare(props) {
                     }} />
                 </div>
                 <span id='serverKey-copied'>Copied 🚀</span><br />
+                { /*
                 <div className='Cloudflare-options'>
                     <label>Options:</label><br />
                     <input type="checkbox" id="save-recording" defaultChecked={ saveRecording } onChange={
@@ -59,6 +70,7 @@ export function Cloudflare(props) {
                     } />
                     <label htmlFor="require-signed-urls">Require Signed URLs</label><br />
                 </div>
+                */}
                 <a href="https://developers.cloudflare.com/stream/stream-live/" target="_blank" rel="noopener noreferrer">Learn more about Cloudflare Stream</a><br />
                 <a href="https://dash.cloudflare.com/login" target="_blank" rel="noopener noreferrer">Log in to your Cloudflare account</a>
             </div>
@@ -67,8 +79,6 @@ export function Cloudflare(props) {
 }
 
 Cloudflare.propTypes = {
-    server: PropTypes.string.isRequired,
-    serverKey: PropTypes.string.isRequired,
-    saveRecording: PropTypes.bool.isRequired,
-    requireSignedUrls: PropTypes.bool.isRequired,
+    streamData: PropTypes.object.isRequired,
+    streamOutputs: PropTypes.object.isRequired,
 }

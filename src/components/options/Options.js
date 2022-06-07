@@ -18,22 +18,24 @@ import srt from '../../assets/srt.svg';
 import add from '../../assets/add.svg';
 import remove from '../../assets/remove.svg';
 
-const outputs = [
-    {
-        id: 1,
-        type: 'cloudflare',
-        displayName: 'Cloudflare',
-        icon: cfstream,
-        content: <Cloudflare 
-            server="rtmp://rtmp.cloudflarestream.net/" 
-            serverKey="random"
-            saveRecording={true}
-            requireSignedUrls={false}
-        />,
-    }
-];
+export function Options(streamData, streamOutputs) {
+    const outputs = [
+        {
+            id: 1,
+            type: 'cloudflare',
+            displayName: 'Cloudflare',
+            icon: cfstream,
+            content: <Cloudflare 
+                streamData={streamData}
+                streamOutputs={streamOutputs}
+                server="rtmp://rtmp.cloudflarestream.net/" 
+                serverKey="random"
+                saveRecording={true}
+                requireSignedUrls={false}
+            />,
+        }
+    ];
 
-export function Options() {
     const [active, setActive] = useState(outputs[0]);
     const [counter, setCounter] = useState(outputs.length);
     return (

@@ -42,8 +42,8 @@ function App() {
       <Auth />
       <Header className="App-header" />
       <main className="App-body">
-        <Preview data={streamData} outputs={streamOutputs} />
-        <Options />
+        <Preview streamData={streamData} streamOutputs={streamOutputs} />
+        <Options streamData={streamData} streamOutputs={streamOutputs} />
         <Chat />
         <Updates />
       </main>
