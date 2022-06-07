@@ -120,13 +120,17 @@ export function Options() {
         console.log(outputs);
     }
 
+    function handleTick(){
+        if (outputs.length < 2) {
+            getOutputs();
+        }
+    }
+
     useEffect(() => {
         // update every second
         const interval = setInterval(() => {
             try {
-                if (outputs.length < 2) {
-                    getOutputs();
-                }
+                handleTick();
             } catch (e) { }
         }
         , 2000);
