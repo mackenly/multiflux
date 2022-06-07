@@ -18,14 +18,47 @@ export function Preview() {
   const [streamId, setStreamId] = useState("");
   const [streamingState, setStreamingState] = useState("disconnected");
 
+  async function getStreamOutputs(key, accountId, streamId) {
+    const init = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${key}`,
+        "account-id": `${accountId}`,
+        Accept: "application/json",
+      },
+    };
+    const response = await fetch(
+      `/api/streams/live_inputs/${streamId}/videos`,
+      init
+    );
+    const body = await response.json();
+    if (response.status === 401) {
+      throw new Error("Unauthorized");
+    } else if (response.status !== 200) {
+      throw new Error(body.errors[0].message);
+    }
+    return body;
+  }
+
+  useEffect(() => {
+    const key = sessionStorage.getItem("key");
+    const id = JSON.parse(sessionStorage.getItem("selectedAccount")).id;
+    const uid = JSON.parse(sessionStorage.getItem("selectedStream")).uid;
+    if (key && id && uid) {
+      getStreamOutputs(key, id, uid).then((streamOutputs) => {
+        setStreamId(streamOutputs.result[0].uid);
+      });
+    }
+  }, [streamingState]);
+
   useEffect(() => {
     // update every 5 seconds
     const interval = setInterval(() => {
       try {
         const data = JSON.parse(sessionStorage.getItem("streamData"));
-        const outs = JSON.parse(sessionStorage.getItem("streamOutputs"));
+        //const outs = JSON.parse(sessionStorage.getItem("streamOutputs"));
         setStreamName("- " + data.result.meta.name);
-        setStreamId(outs.result[0].uid);
         setStreamingState(data.result.status.current.state);
         console.log(data.result.status.current.state);
       } catch (e) {
@@ -39,17 +72,21 @@ export function Preview() {
     <div className="Preview">
       <div className="Preview-header">
         <div className="Preview-header-status">
-          <svg height="20" width="20">
-            <circle cx="10" cy="10" r="10" fill="red" />
-          </svg>
+          {streamingState === "connected" ? (
+            <svg height="20" width="20">
+              <circle cx="10" cy="10" r="10" fill="red" />
+            </svg>
+          ) : (
+            <svg height="20" width="20">
+              <circle cx="10" cy="10" r="10" fill="yellow" />
+            </svg>
+          )}
           <h2>Live Preview {streamName}</h2>
         </div>
         <div className="Preview-header-icons">
           {streamingState === "connected" ? (
             <img src={cfstream} alt="cfstream" />
-          ) : (
-              null
-          )}
+          ) : null}
         </div>
       </div>
       <div className="Preview-content">
