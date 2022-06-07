@@ -14,7 +14,11 @@ import paste from "../../assets/paste.svg";
 export function Auth() {
   const [active, setActive] = useState();
 
-  if (sessionStorage.getItem("isSelecting") === "false" && sessionStorage.getItem("key") !== null && sessionStorage.getItem("key") !== undefined) {
+  if (
+    sessionStorage.getItem("isSelecting") === "false" &&
+    sessionStorage.getItem("key") !== null &&
+    sessionStorage.getItem("key") !== undefined
+  ) {
     return;
   }
 
@@ -74,10 +78,7 @@ function Login(props) {
         },
         redirect: "follow",
       };
-      const response = await fetch(
-        "/api/login",
-        init
-      ).catch((err) => {
+      const response = await fetch("/api/login", init).catch((err) => {
         throw Error("Key validation failed");
       });
       const data = await response.json();
@@ -246,10 +247,7 @@ function Select(props) {
         Accept: "application/json",
       },
     };
-    const response = await fetch(
-      "/api/streams/live_inputs",
-      init
-    );
+    const response = await fetch("/api/streams/live_inputs", init);
     const body = await response.json();
     if (response.status === 401) {
       throw new Error("Unauthorized");
@@ -285,10 +283,7 @@ function Select(props) {
           throw Error("Account details failed: " + err.message);
         })
         .then((res) => {
-          sessionStorage.setItem(
-            "accountDetails",
-            JSON.stringify(res)
-          );
+          sessionStorage.setItem("accountDetails", JSON.stringify(res));
           setAccounts(res.result);
         });
     } else {
@@ -309,6 +304,49 @@ function Select(props) {
     }
   }
 
+  async function getStreamData(key, accountId, streamId) {
+    const init = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${key}`,
+        "account-id": `${accountId}`,
+        Accept: "application/json",
+      },
+    };
+    const response = await fetch(`/api/streams/live_inputs/${streamId}`, init);
+    const body = await response.json();
+    if (response.status === 401) {
+      throw new Error("Unauthorized");
+    } else if (response.status !== 200) {
+      throw new Error(body.errors[0].message);
+    }
+    return body;
+  }
+
+  async function getStreamOutputs(key, accountId, streamId) {
+    const init = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${key}`,
+        "account-id": `${accountId}`,
+        Accept: "application/json",
+      },
+    };
+    const response = await fetch(
+      `/api/streams/live_inputs/${streamId}/videos`,
+      init
+    );
+    const body = await response.json();
+    if (response.status === 401) {
+      throw new Error("Unauthorized");
+    } else if (response.status !== 200) {
+      throw new Error(body.errors[0].message);
+    }
+    return body;
+  }
+
   useEffect(() => {
     try {
       const key = sessionStorage.getItem("key");
@@ -320,7 +358,6 @@ function Select(props) {
       grabAccounts();
 
       selectedAccountGrab();
-
     } catch (error) {
       console.error(error.message);
     }
@@ -357,9 +394,7 @@ function Select(props) {
               id="stream-selector"
               onChange={(e) => {
                 if (e.target.selectedIndex !== 0) {
-                  setSelectedStream(
-                    streams[e.target.selectedIndex - 1]
-                  );
+                  setSelectedStream(streams[e.target.selectedIndex - 1]);
                   sessionStorage.setItem(
                     "selectedStream",
                     JSON.stringify(streams[e.target.selectedIndex - 1])
@@ -381,11 +416,43 @@ function Select(props) {
         <button
           id="Auth-Select-Use"
           onClick={() => {
-              console.log("Stream selected: " + selectedStream);
-              if (selectedStream.uid !== undefined && selectedStream.uid !== null) {
-                sessionStorage.setItem("isSelecting", false);
-                window.location.reload();
-              }
+            console.log("Stream selected: " + selectedStream);
+            if (
+              selectedStream.uid !== undefined &&
+              selectedStream.uid !== null
+            ) {
+              getStreamData(
+                sessionStorage.getItem("key"),
+                selectedAccount.id,
+                selectedStream.uid
+              )
+                .then((streamData) => {
+                  getStreamOutputs(
+                    sessionStorage.getItem("key"),
+                    selectedAccount.id,
+                    selectedStream.uid
+                  )
+                    .then((streamOutputs) => {
+                      sessionStorage.setItem(
+                        "streamData",
+                        JSON.stringify(streamData)
+                      );
+                      sessionStorage.setItem(
+                        "streamOutputs",
+                        JSON.stringify(streamOutputs)
+                      );
+                    })
+                    .catch((err) => {
+                      throw Error("Stream outputs failed");
+                    });
+                })
+                .catch((err) => {
+                  throw Error("Stream data failed");
+                });
+
+              sessionStorage.setItem("isSelecting", false);
+              window.location.reload();
+            }
           }}
         >
           Select Stream

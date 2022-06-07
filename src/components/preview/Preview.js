@@ -12,17 +12,19 @@ import { Stream } from '@cloudflare/stream-react';
 
 import cfstream from '../../assets/cfstream.svg';
 
-export function Preview() {
-    const [preview, setPreview] = useState(null);
-    const [streamName, setStreamName] = useState('');
+export function Preview(data, outputs) {
+    const [streamName, setStreamName] = useState("");
+    const [streamId, setStreamId] = useState("");
 
     useEffect(() => {
-        const selectedStream = JSON.parse(sessionStorage.getItem('selectedStream'));
-        if (selectedStream !== null && selectedStream !== undefined) {
-            setPreview(<Stream controls autoPlay responsive src={selectedStream.uid} className='Stream' />);
-            setStreamName("- " + selectedStream.meta.name);
+        if (data !== null && data !== undefined) {
+            setStreamName(data.result.meta.name);
         }
-    }, []);
+        if (outputs !== null && outputs !== undefined) {
+            setStreamId(outputs.result[0].uid);
+        }
+    }, [data, outputs]);
+
 
     return (
         <div className="Preview">
@@ -31,14 +33,14 @@ export function Preview() {
                     <svg height="20" width="20">
                         <circle cx="10" cy="10" r="10" fill="red" />
                     </svg>
-                    <h2>Live Preview {streamName}</h2>
+                    <h2>Live Preview {"- " + streamName}</h2>
                 </div>
                 <div className="Preview-header-icons">
                     <img src={cfstream} alt="cfstream" />
                 </div>
             </div>
             <div className="Preview-content">
-                {preview}
+                <Stream controls autoplay src={streamId} />
             </div>
         </div>
     )

@@ -40,7 +40,7 @@
       };
       console.log(init);
       const response = await fetch(
-        `https://api.cloudflare.com/client/v4/accounts/${headers.get("account-id")}/stream/live_inputs/${params.id}/`,
+        `https://api.cloudflare.com/client/v4/accounts/${headers.get("account-id")}/stream/live_inputs/${params.id}/videos`,
         init
       );
       const body = await gatherResponse(response);
