@@ -17,7 +17,6 @@ export function Preview() {
   const [streamName, setStreamName] = useState("");
   const [streamId, setStreamId] = useState("");
   const [streamingState, setStreamingState] = useState("disconnected");
-  const [player, setPlayer] = useState(null);
 
   async function getStreamOutputs(key, accountId, streamId) {
     const init = {
@@ -64,7 +63,6 @@ export function Preview() {
               getStreamOutputs(key, id, uid).then((streamOutputs) => {
                 if (streamOutputs.result[0].uid !== streamId) {
                   setStreamId(streamOutputs.result[0].uid);
-                  setPlayer(<Stream muted autoplay responsive src={streamId} />)
                 }
               });
             }
@@ -101,7 +99,14 @@ export function Preview() {
       </div>
       <div className="Preview-content">
         {streamingState === "connected" ? (
-            player
+          <div className="videoPlayer">
+            <iframe
+              title="Stream Preview"
+              src={`https://iframe.videodelivery.net/${streamId}`}
+              allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+              allowfullscreen="true"
+            ></iframe>
+          </div>
         ) : (
           <div className="notStreaming">
             <p>{streamingState}...</p>
