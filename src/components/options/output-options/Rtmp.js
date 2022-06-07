@@ -16,21 +16,6 @@ export function Rtmp(props) {
     const [serverValue, setServerValue] = useState(props.url);
     const [serverKeyValue, setServerKeyValue] = useState(props.streamKey);
 
-    if (props.id < 1000) {
-        const imgs = document.getElementsByTagName('img');
-        for (let i = 0; i < imgs.length; i++) {
-            if (imgs[i].src.includes('paste')) {
-                imgs[i].style.visibility = 'none';
-            }
-        }
-        const inputs = document.getElementsByTagName('input');
-        for (let i = 0; i < inputs.length; i++) {
-            if (inputs[i].id.includes('-url') || inputs[i].id.includes('-key')) {
-                inputs[i].disabled = true;
-            }
-        }
-    }
-
     return (
         <div className="Rtmp">
             { props.status === null ?
