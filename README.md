@@ -2,7 +2,9 @@
 Cloud Multistreaming Platform Powered by Cloudflare Workers
 
 **Note**
-This project is in development and is not yet ready for use. Many values are hardcoded and not yet configurable.
+This project is in development. You'll need an API token from your cloudflare account to use it.
+
+This project utilizes the [Cloudflare Workers](https://www.cloudflare.com/workers/), [Cloudflare Pages](https://pages.cloudflare.com/) and [Cloudflare Stream](https://www.cloudflare.com/products/cloudflare-stream/) APIs to create a multistreaming platform.
 
 <img src="assets/social.png" alt="Banner image containing the text Multiflux, Cloud Multistreaming Platform Powered by Cloudflare Workers" title="Multiflux Banner Image"><br><br>
 
@@ -16,12 +18,13 @@ This project is in development and is not yet ready for use. Many values are har
 ## Purpose:
 Multistreaming can be costly and complicated. Services such as Restream™ and Castr™ provide most of the features users need but don't give you the same flexibility, customizability, or cost savings as self deployed solutions. Other solutions do exist, such as configuring a NGINX server to redistribute incoming streams, but that requires heavy knowlege of config files and leaves much to be desired when it comes to user firendlyness.
 
-Multiflux allows anyone to deploy the project onto their own Cloudlfare account and utilize their Workers, Pages, KV, and Stream services for as little as $5/m.
+Multiflux allows anyone to deploy the project onto their own Cloudlfare account and utilize their Workers, Pages, KV, and Stream services for as little as $10/m.
 
 ## Deployment
-TODO - How to deploy (include [deploy button](https://blog.cloudflare.com/introducing-deploy-buttons/))
+TODO - How to deploy (include [deploy button](https://blog.cloudflare.com/introducing-deploy-buttons/)) - not sure if this is possible since everything is now on Pages
 
 ## How Tos
+TODO - Provide setup tutorials
 
 ## Settings and Options
 TODO - Explain various settings and options avaliable
