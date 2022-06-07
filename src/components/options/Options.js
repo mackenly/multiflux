@@ -68,6 +68,26 @@ export function Options(streamData, streamOutputs) {
         setActive(outputs[outputs.length - 1]);
     }
 
+    async function removeOutput(id) {
+        const init = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+                "account-id": JSON.parse(sessionStorage.getItem('selectedAccount')).id,
+            },
+        };
+        const response = await fetch(`/api/streams/live_inputs/${JSON.parse(sessionStorage.getItem("selectedStream")).uid}/outputs/${id}`, init);
+        const body = await response.json();
+        if (response.status === 401) {
+            throw new Error("Unauthorized");
+        } else if (response.status !== 200) {
+            throw new Error(body);
+        }
+        setOutputs(outputs.filter(output => output.id !== id));
+        setActive(outputs[0]);
+    }
+
     async function getOutputs() {
         const init = {
             method: 'GET',
@@ -192,9 +212,8 @@ export function Options(streamData, streamOutputs) {
                 { active.type !== 'cloudflare' &&
                     <img src={ remove } height="30px" title={"Remove " + active.displayName} alt={ "Remove " + active.displayName } onClick={
                         () => {
-                            // remove the output from the list
-                            outputs.splice( outputs.indexOf( active ), 1 );
-                            setActive( outputs[0] );
+                            // delete the output
+                            removeOutput( active.id );
                         }
                     } />
                 }
