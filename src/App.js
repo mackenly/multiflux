@@ -33,28 +33,19 @@ function App() {
       const selectedStream = JSON.parse(
         sessionStorage.getItem("selectedStream")
       );
-      if (sessionStorage.getItem("streamData")) {
-        const selectedStreamData = JSON.parse(
-          sessionStorage.getItem("streamData")
-        );
-        if (sessionStorage.getItem("streamOutputs")) {
-          const selectedStreamOutputs = JSON.parse(
-            sessionStorage.getItem("streamOutputs")
-          );
-          if (
-            selectedStream !== null &&
-            selectedStream !== undefined &&
-            selectedStreamData !== null &&
-            selectedStreamData !== undefined &&
-            selectedStreamOutputs !== null &&
-            selectedStreamOutputs !== undefined
-          ) {
-            setStream(selectedStream);
-            setStreamData(selectedStreamData);
-            setStreamOutputs(selectedStreamOutputs);
-          }
-        }
-      }
+      setStream(selectedStream);
+    }
+    if (sessionStorage.getItem("streamData")) {
+      const selectedStreamData = JSON.parse(
+        sessionStorage.getItem("streamData")
+      );
+      setStreamData(selectedStreamData);
+    }
+    if (sessionStorage.getItem("streamOutputs")) {
+      const selectedStreamOutputs = JSON.parse(
+        sessionStorage.getItem("streamOutputs")
+      );
+      setStreamOutputs(selectedStreamOutputs);
     }
   }
   updateStuff();
@@ -68,7 +59,7 @@ function App() {
       <Header className="App-header" />
       <main className="App-body">
         {
-          stream !== null && stream !== undefined && streamData !== null && streamData !== undefined && streamOutputs !== null && streamOutputs !== undefined ? (
+          stream !== null && streamData !== null && streamOutputs !== null ? (
             <>
               <Preview streamData={streamData} streamOutputs={streamOutputs} />
               <Options streamData={streamData} streamOutputs={streamOutputs} />
