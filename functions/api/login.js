@@ -85,7 +85,6 @@ async function handleRequest(request) {
       statusText: "OK",
       headers: {
         "Content-Type": "json/application",
-        "Access-Control-Allow-Origin": "http://localhost:3000",
       },
     });
   } catch (error) {
@@ -96,7 +95,6 @@ async function handleRequest(request) {
           status: 401,
           headers: {
             "Content-Type": "json/application",
-            "Access-Control-Allow-Origin": "http://localhost:3000",
           },
         });
       default:
@@ -104,7 +102,6 @@ async function handleRequest(request) {
           status: 500,
           headers: {
             "Content-Type": "json/application",
-            "Access-Control-Allow-Origin": "http://localhost:3000",
           },
         });
     }
@@ -131,7 +128,6 @@ export async function onRequest(context) {
     return new Response("", {
       status: 201,
       headers: {
-        "Access-Control-Allow-Origin": "http://localhost:3000",
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type, Authorization",
       },
@@ -148,7 +144,6 @@ export async function onRequest(context) {
     status: 400,
     headers: {
       "Content-Type": "text/plain",
-      "Access-Control-Allow-Origin": "http://localhost:3000",
     },
   });
 }

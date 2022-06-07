@@ -50,7 +50,7 @@ function Login(props) {
         Accept: "application/json",
       },
     };
-    const response = await fetch("http://localhost:8788/api/accounts", init);
+    const response = await fetch("/api/accounts", init);
     const body = await response.json();
     if (response.status === 401) {
       throw new Error("Unauthorized");
@@ -75,7 +75,7 @@ function Login(props) {
         redirect: "follow",
       };
       const response = await fetch(
-        "http://localhost:8788/api/login",
+        "/api/login",
         init
       ).catch((err) => {
         throw Error("Key validation failed");
@@ -226,7 +226,7 @@ function Select(props) {
         Accept: "application/json",
       },
     };
-    const response = await fetch("http://localhost:8788/api/accounts", init);
+    const response = await fetch("/api/accounts", init);
     const body = await response.json();
     if (response.status === 401) {
       throw new Error("Unauthorized");
@@ -247,7 +247,7 @@ function Select(props) {
       },
     };
     const response = await fetch(
-      "http://localhost:8788/api/streams/live_inputs",
+      "/api/streams/live_inputs",
       init
     );
     const body = await response.json();

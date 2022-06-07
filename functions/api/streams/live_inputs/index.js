@@ -49,12 +49,10 @@
       } else if (response.status !== 200) {
         throw new Error(body);
       }
-      const headers2 = response.headers;
-      headers2.set("Access-Control-Allow-Origin", "http://localhost:3000");
       return new Response(body, {
         status: response.status,
         statusText: response.statusText,
-        headers: headers2,
+        headers: response.headers,
       });
     } catch (error) {
       console.log(error);
@@ -64,7 +62,6 @@
             status: 401,
             headers: {
               "Content-Type": "json/application",
-              "Access-Control-Allow-Origin": "http://localhost:3000",
             },
           });
         default:
@@ -72,7 +69,6 @@
             status: 500,
             headers: {
               "Content-Type": "json/application",
-              "Access-Control-Allow-Origin": "http://localhost:3000",
             },
           });
       }
@@ -99,7 +95,6 @@
     return new Response("", {
       status: 201,
       headers: {
-        "Access-Control-Allow-Origin": "http://localhost:3000",
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type, Authorization, account-id",
       },
@@ -116,7 +111,6 @@
       status: 400,
       headers: {
         "Content-Type": "text/plain",
-        "Access-Control-Allow-Origin": "http://localhost:3000",
       },
     });
   }
