@@ -25,6 +25,71 @@ import "./components/preview/Preview.css";
 
 function App() {
 
+  async function getStreamOutputs(key, accountId, streamId) {
+    const init = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${key}`,
+        "account-id": `${accountId}`,
+        Accept: "application/json",
+      },
+    };
+    const response = await fetch(
+      `/api/streams/live_inputs/${streamId}/videos`,
+      init
+    );
+    const body = await response.json();
+    if (response.status === 401) {
+      throw new Error("Unauthorized");
+    } else if (response.status !== 200) {
+      throw new Error(body.errors[0].message);
+    }
+    return body;
+  }
+
+  async function getStreamData(key, accountId, streamId) {
+    const init = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${key}`,
+        "account-id": `${accountId}`,
+        Accept: "application/json",
+      },
+    };
+    const response = await fetch(`/api/streams/live_inputs/${streamId}`, init);
+    const body = await response.json();
+    if (response.status === 401) {
+      throw new Error("Unauthorized");
+    } else if (response.status !== 200) {
+      throw new Error(body.errors[0].message);
+    }
+    return body;
+  }
+  // List outputs, Live input details
+
+  useEffect(() => {
+    // update every 5 seconds
+    const interval = setInterval(() => {
+      try {
+        const updatedStreamOutputs = getStreamOutputs(
+          sessionStorage.getItem("key"),
+          JSON.parse(sessionStorage.getItem("selectedAccount")).uid,
+          JSON.parse(sessionStorage.getItem("selectedStream")).id
+        );
+        sessionStorage.setItem("streamOutputs", JSON.stringify(updatedStreamOutputs));
+        const updatedStreamData = getStreamData(
+          sessionStorage.getItem("key"),
+          JSON.parse(sessionStorage.getItem("selectedAccount")).id,
+          JSON.parse(sessionStorage.getItem("selectedAccount")).uid
+        );
+        sessionStorage.setItem("streamData", JSON.stringify(updatedStreamData));
+      } catch (e) {}
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="App">
       <Auth />

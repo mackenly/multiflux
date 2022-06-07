@@ -19,7 +19,7 @@ export function Preview() {
   const [streamingState, setStreamingState] = useState("disconnected");
 
   useEffect(() => {
-    // update every second
+    // update every 5 seconds
     const interval = setInterval(() => {
       try {
         const data = JSON.parse(sessionStorage.getItem("streamData"));
@@ -28,18 +28,7 @@ export function Preview() {
         setStreamId(outs.result[0].uid);
         setStreamingState(data.result.status.current.state);
       } catch (e) {}
-      switch (streamingState) {
-        case "connected":
-          // streaming:
-          break;
-        case "disconnected":
-          // not streaming:
-          break;
-        default:
-          // unknown:
-          break;
-      }
-    }, 1000);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
