@@ -17,10 +17,10 @@ export function Preview(data, outputs) {
     const [streamId, setStreamId] = useState("");
 
     useEffect(() => {
-        if (data.result.meta.name !== null && data.result.meta.name !== undefined) {
+        if (data.result) {
             setStreamName(data.result.meta.name);
         }
-        if (outputs.result[0].uid !== null && outputs.result[0].uid !== undefined) {
+        if (outputs.result) {
             setStreamId(outputs.result[0].uid);
         }
     }, [data, outputs]);
@@ -40,7 +40,7 @@ export function Preview(data, outputs) {
                 </div>
             </div>
             <div className="Preview-content">
-                {streamId !== "" ? <Stream controls autoplay src={streamId} /> : <div>Loading...</div>}
+                {streamId !== "" ? <Stream controls autoplay src={streamId} /> : <div>Not Streaming...</div>}
             </div>
         </div>
     )
