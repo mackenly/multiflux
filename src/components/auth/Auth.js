@@ -441,6 +441,8 @@ function Select(props) {
                         "streamOutputs",
                         JSON.stringify(streamOutputs)
                       );
+                      sessionStorage.setItem("isSelecting", false);
+                      window.location.reload();
                     })
                     .catch((err) => {
                       throw Error("Stream outputs failed");
@@ -449,9 +451,6 @@ function Select(props) {
                 .catch((err) => {
                   throw Error("Stream data failed");
                 });
-
-              sessionStorage.setItem("isSelecting", false);
-              window.location.reload();
             }
           }}
         >

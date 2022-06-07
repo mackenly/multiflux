@@ -14,8 +14,6 @@ import copy from '../../../assets/copy.svg';
 export function Cloudflare(props) {
     const [server, setServer] = useState("");
     const [serverKey, setServerKey] = useState("");
-    const [saveRecording, setSaveRecording] = useState(props.saveRecording);
-    const [requireSignedUrls, setRequireSignedUrls] = useState(props.requireSignedUrls);
 
     useEffect(() => {
         if (props.streamData.result) {
@@ -54,23 +52,6 @@ export function Cloudflare(props) {
                     }} />
                 </div>
                 <span id='serverKey-copied'>Copied 🚀</span><br />
-                { /*
-                <div className='Cloudflare-options'>
-                    <label>Options:</label><br />
-                    <input type="checkbox" id="save-recording" defaultChecked={ saveRecording } onChange={
-                        (e) => {
-                            setSaveRecording(e.target.checked);
-                        }
-                    } />
-                    <label htmlFor="save-recording">Save Recording</label><br />
-                    <input type="checkbox" id="require-signed-urls" defaultChecked={ requireSignedUrls } onChange={
-                        (e) => {
-                            setRequireSignedUrls(e.target.checked);
-                        }
-                    } />
-                    <label htmlFor="require-signed-urls">Require Signed URLs</label><br />
-                </div>
-                */}
                 <a href="https://developers.cloudflare.com/stream/stream-live/" target="_blank" rel="noopener noreferrer">Learn more about Cloudflare Stream</a><br />
                 <a href="https://dash.cloudflare.com/login" target="_blank" rel="noopener noreferrer">Log in to your Cloudflare account</a>
             </div>
