@@ -72,19 +72,17 @@ function App() {
     // update every 5 seconds
     const interval = setInterval(() => {
       try {
+        const key = sessionStorage.getItem("key");
+        const id = JSON.parse(sessionStorage.getItem("selectedAccount")).id;
+        const uid = JSON.parse(sessionStorage.getItem("selectedStream")).uid;
         sessionStorage.setItem(
           "streamOutputs",
-          JSON.stringify(getStreamOutputs(
-            sessionStorage.getItem("key"),
-            JSON.parse(sessionStorage.getItem("selectedAccount")).id,
-            JSON.parse(sessionStorage.getItem("selectedStream")).uid
-          ))
+          getStreamOutputs(key, id, uid)
         );
-        sessionStorage.setItem("streamData", JSON.stringify(getStreamData(
-          sessionStorage.getItem("key"),
-          JSON.parse(sessionStorage.getItem("selectedAccount")).id,
-          JSON.parse(sessionStorage.getItem("selectedStream")).uid
-        )));
+        sessionStorage.setItem(
+          "streamData",
+          getStreamData(key, id, uid)
+        );
       } catch (e) {
         console.error(e);
       }
