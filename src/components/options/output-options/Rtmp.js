@@ -11,24 +11,9 @@ import { useState, useEffect } from 'react';
 
 import paste from '../../../assets/paste.svg';
 
-export function Rtmp(id, url, streamKey) {
-    console.log(id, url, streamKey);
-    const [serverValue, setServerValue] = useState("");
-    const [serverKeyValue, setServerKeyValue] = useState("");
-
-    useEffect(() => {
-        if (url) {
-            setServerValue(url);
-        }
-        console.log(url);
-    }, [url]);
-
-    useEffect(() => {
-        if (streamKey) {
-            setServerKeyValue(streamKey);
-        }
-        console.log(streamKey);
-    }, [streamKey]);
+export function Rtmp(props) {
+    const [serverValue, setServerValue] = useState(props.url);
+    const [serverKeyValue, setServerKeyValue] = useState(props.streamKey);
 
     return (
         <div className="Rtmp">
