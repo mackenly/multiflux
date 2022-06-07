@@ -24,49 +24,16 @@ import "./components/updates/Updates.css";
 import "./components/preview/Preview.css";
 
 function App() {
-  const [stream, setStream] = useState(null);
-  const [streamData, setStreamData] = useState(null);
-  const [streamOutputs, setStreamOutputs] = useState(null);
 
-  function updateStuff() {
-    if (sessionStorage.getItem("selectedStream")) {
-      const selectedStream = JSON.parse(
-        sessionStorage.getItem("selectedStream")
-      );
-      setStream(selectedStream);
-    }
-    if (sessionStorage.getItem("streamData")) {
-      const selectedStreamData = JSON.parse(
-        sessionStorage.getItem("streamData")
-      );
-      setStreamData(selectedStreamData);
-    }
-    if (sessionStorage.getItem("streamOutputs")) {
-      const selectedStreamOutputs = JSON.parse(
-        sessionStorage.getItem("streamOutputs")
-      );
-      setStreamOutputs(selectedStreamOutputs);
-    }
-  }
-
-  useEffect(() => {
-    updateStuff();
-  });
   return (
     <div className="App">
       <Auth />
       <Header className="App-header" />
       <main className="App-body">
-        {
-          stream !== null && streamData !== null && streamOutputs !== null ? (
-            <>
-              <Preview streamData={streamData} streamOutputs={streamOutputs} />
-              <Options streamData={streamData} streamOutputs={streamOutputs} />
-              <Chat />
-              <Updates />
-              </>
-            ) : <div>Loading...</div>
-        }
+        <Preview />
+        <Options />
+        <Chat />
+        <Updates />
       </main>
       <footer className="App-footer">
         <Footer />

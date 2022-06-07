@@ -12,18 +12,21 @@ import { Stream } from '@cloudflare/stream-react';
 
 import cfstream from '../../assets/cfstream.svg';
 
-export function Preview(streamData, streamOutputs) {
+export function Preview() {
     const [streamName, setStreamName] = useState("");
     const [streamId, setStreamId] = useState("");
 
     useEffect(() => {
-        if (streamData.result) {
-            setStreamName("- " + streamData.result.meta.name);
+        // update every second
+        const interval = setInterval(() => {
+            try {
+                setStreamName("- " + JSON.parse(sessionStorage.getItem("streamData")).result.meta.name);
+                setStreamId(JSON.parse(sessionStorage.getItem("streamOutputs")).result[0].uid);
+            } catch (e) { }
         }
-        if (streamOutputs.result) {
-            setStreamId(streamOutputs.result[0].uid);
-        }
-    }, [streamData, streamOutputs]);
+        , 1000);
+        return () => clearInterval(interval);
+    }, []);
 
 
     return (
