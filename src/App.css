@@ -1,8 +1,20 @@
+/**
+  * Copyright Mackenly Jones. All rights reserved.
+  * 
+  * Use of this software is governed by the Business Source License
+  * included in the LICENSE file.
+  * 
+  * As of the Change Date specified in that file, in accordance with
+  * the Business Source License, use of this software will be governed
+  * by the GNU AFFERO GENERAL PUBLIC LICENSE 3.0.
+*/
+
 :root {
   --header-text-color: #fff;
   --content-body-color: #f5f7fa;
   --content-link-color: rgb(109, 154, 227);
   --content-disabled-color: #9b9d9e;
+  --content-error-color: #f44336;
   --header-bg-color: rgb(5, 14, 26);
   --header-bg-color-opaque: rgba(5, 14, 26, 0.6);
   --main-bg-color: rgb(0, 3, 8);

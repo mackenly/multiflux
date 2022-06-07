@@ -1,0 +1,122 @@
+// Copyright Mackenly Jones. All rights reserved.
+//
+// Use of this software is governed by the Business Source License
+// included in the LICENSE file.
+//
+// As of the Change Date specified in that file, in accordance with
+// the Business Source License, use of this software will be governed
+// by the GNU AFFERO GENERAL PUBLIC LICENSE 3.0.
+
+/**
+ * gatherResponse awaits and returns a response body as a string.
+ * Use await gatherResponse(..) in an async function to get the response body
+ * @param {Response} response
+ */
+async function gatherResponse(response) {
+  const { headers } = response;
+  const contentType = headers.get("content-type") || "";
+  if (contentType.includes("application/json")) {
+    return JSON.stringify(await response.json());
+  } else {
+    return response.text();
+  }
+}
+
+/**
+ * Handle a request to the accounts endpoint by sending a get accounts request to the CloudFlare API.
+ * @param {*} request Contains the request object from the incoming request.
+ * @returns The response to the request.
+ */
+async function handleRequest(request) {
+  const { headers } = request;
+  try {
+    // get accounts
+    const init = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${headers.get("Authorization")}`,
+      },
+    };
+    console.log(init);
+    const response = await fetch(
+      "https://api.cloudflare.com/client/v4/accounts/",
+      init
+    );
+    const body = await gatherResponse(response);
+    if (response.status === 401) {
+      throw new Error("Unauthorized");
+    } else if (response.status !== 200) {
+      throw new Error(body);
+    }
+    const headersWithCORS = response.headers;
+    headersWithCORS.set("Access-Control-Allow-Origin", "http://localhost:3000");
+    return new Response(body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: headersWithCORS,
+    });
+  } catch (error) {
+    console.log(error);
+    switch (error.message) {
+      case "Unauthorized":
+        return new Response(await JSON.stringify(error.message), {
+          status: 401,
+          headers: {
+            "Content-Type": "json/application",
+            "Access-Control-Allow-Origin": "http://localhost:3000",
+          },
+        });
+      default:
+        return new Response(await error.message, {
+          status: 500,
+          headers: {
+            "Content-Type": "json/application",
+            "Access-Control-Allow-Origin": "http://localhost:3000",
+          },
+        });
+    }
+  }
+}
+
+/**
+ * Handles a request to the accounts endpoint.
+ * @param {*} context
+ * @returns If the request is a GET, the response to the request. Else, an error 400.
+ */
+export async function onRequest(context) {
+  // Contents of context object
+  const {
+    request, // same as existing Worker API
+    env, // same as existing Worker API
+    params, // if filename includes [id] or [[path]]
+    waitUntil, // same as ctx.waitUntil in existing Worker API
+    data, // arbitrary space for passing data between middlewares
+  } = context;
+
+  // handle options requests
+  if (request.method === "OPTIONS") {
+    return new Response("", {
+      status: 201,
+      headers: {
+        "Access-Control-Allow-Origin": "http://localhost:3000",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
+    });
+  }
+
+  // if post request, handle it
+  if (request.method === "GET") {
+    return handleRequest(request);
+  }
+
+  // return an error if request is not a post
+  return new Response("Invalid Request", {
+    status: 400,
+    headers: {
+      "Content-Type": "text/plain",
+      "Access-Control-Allow-Origin": "http://localhost:3000",
+    },
+  });
+}

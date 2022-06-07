@@ -61,6 +61,8 @@
   background-color: inherit;
 }
 
-.Preview-content video {
+.Stream {
+  width: 100%;
+  height: auto;
   border-radius: 3px;
 }
