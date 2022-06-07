@@ -64,7 +64,6 @@ function App() {
     } else if (response.status !== 200) {
       throw new Error(body.errors[0].message);
     }
-    console.log(body);
     return body;
   }
   // List outputs, Live input details
@@ -73,23 +72,19 @@ function App() {
     // update every 5 seconds
     const interval = setInterval(() => {
       try {
-        const updatedStreamOutputs = getStreamOutputs(
-          sessionStorage.getItem("key"),
-          JSON.parse(sessionStorage.getItem("selectedAccount")).id,
-          JSON.parse(sessionStorage.getItem("selectedStream")).uid
-        );
-        console.log(updatedStreamOutputs);
         sessionStorage.setItem(
           "streamOutputs",
-          JSON.stringify(updatedStreamOutputs)
+          JSON.stringify(getStreamOutputs(
+            sessionStorage.getItem("key"),
+            JSON.parse(sessionStorage.getItem("selectedAccount")).id,
+            JSON.parse(sessionStorage.getItem("selectedStream")).uid
+          ))
         );
-        const updatedStreamData = getStreamData(
+        sessionStorage.setItem("streamData", JSON.stringify(getStreamData(
           sessionStorage.getItem("key"),
           JSON.parse(sessionStorage.getItem("selectedAccount")).id,
           JSON.parse(sessionStorage.getItem("selectedStream")).uid
-        );
-        console.log(updatedStreamData);
-        sessionStorage.setItem("streamData", JSON.stringify(updatedStreamData));
+        )));
       } catch (e) {
         console.error(e);
       }
