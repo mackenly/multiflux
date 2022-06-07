@@ -129,9 +129,10 @@ export function Options() {
                 }
             } catch (e) { }
         }
-        , 5000);
+        , 2000);
         return () => clearInterval(interval);
     }, []);
+
 
     return (
         <div className="Options">
