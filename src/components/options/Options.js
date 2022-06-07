@@ -29,7 +29,7 @@ export function Options(streamData, streamOutputs) {
                 streamData={streamData}
                 streamOutputs={streamOutputs}
             />,
-        }
+        },
     ]);
     const [active, setActive] = useState(outputs[0]);
     const [counter, setCounter] = useState(outputs.length);
@@ -83,7 +83,7 @@ export function Options(streamData, streamOutputs) {
             }
         }
         );
-        setOutputs({
+        setOutputs([{
             id: 1,
             type: 'cloudflare',
             displayName: 'Cloudflare',
@@ -92,7 +92,7 @@ export function Options(streamData, streamOutputs) {
                 streamData={streamData}
                 streamOutputs={streamOutputs}
             />,
-        }, ...out);
+        }, ...out]);
     }
 
     useEffect(() => {
