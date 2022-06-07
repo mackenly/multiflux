@@ -24,7 +24,6 @@ import "./components/updates/Updates.css";
 import "./components/preview/Preview.css";
 
 function App() {
-
   async function getStreamOutputs(key, accountId, streamId) {
     const init = {
       method: "GET",
@@ -65,6 +64,7 @@ function App() {
     } else if (response.status !== 200) {
       throw new Error(body.errors[0].message);
     }
+    console.log(body);
     return body;
   }
   // List outputs, Live input details
@@ -79,7 +79,10 @@ function App() {
           JSON.parse(sessionStorage.getItem("selectedStream")).uid
         );
         console.log(updatedStreamOutputs);
-        sessionStorage.setItem("streamOutputs", JSON.stringify(updatedStreamOutputs));
+        sessionStorage.setItem(
+          "streamOutputs",
+          JSON.stringify(updatedStreamOutputs)
+        );
         const updatedStreamData = getStreamData(
           sessionStorage.getItem("key"),
           JSON.parse(sessionStorage.getItem("selectedAccount")).id,
