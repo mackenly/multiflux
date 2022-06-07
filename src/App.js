@@ -85,7 +85,9 @@ function App() {
           JSON.parse(sessionStorage.getItem("selectedStream")).uid
         );
         sessionStorage.setItem("streamData", JSON.stringify(updatedStreamData));
-      } catch (e) {}
+      } catch (e) {
+        console.error(e);
+      }
     }, 5000);
     return () => clearInterval(interval);
   }, []);
