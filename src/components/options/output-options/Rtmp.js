@@ -12,6 +12,7 @@ import { useState, useEffect } from 'react';
 import paste from '../../../assets/paste.svg';
 
 export function Rtmp(id, url, streamKey) {
+    console.log(id, url, streamKey);
     const [serverValue, setServerValue] = useState("");
     const [serverKeyValue, setServerKeyValue] = useState("");
 

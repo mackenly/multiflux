@@ -124,7 +124,9 @@ export function Options() {
         // update every second
         const interval = setInterval(() => {
             try {
-                getOutputs();
+                if (outputs.length < 2) {
+                    getOutputs();
+                }
             } catch (e) { }
         }
         , 5000);
