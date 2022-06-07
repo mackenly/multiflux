@@ -62,6 +62,7 @@ export function Preview() {
             if (key && id && uid) {
               getStreamOutputs(key, id, uid).then((streamOutputs) => {
                 setStreamId(streamOutputs.result[0].uid);
+                console.log(streamOutputs);
               });
             }
           }
