@@ -44,6 +44,7 @@ function App() {
     } else if (response.status !== 200) {
       throw new Error(body.errors[0].message);
     }
+    sessionStorage.setItem("streamOutputs", JSON.stringify(body));
     return body;
   }
 
@@ -64,6 +65,7 @@ function App() {
     } else if (response.status !== 200) {
       throw new Error(body.errors[0].message);
     }
+    sessionStorage.setItem("streamData",JSON.stringify(body));
     return body;
   }
   // List outputs, Live input details
@@ -75,14 +77,8 @@ function App() {
         const key = sessionStorage.getItem("key");
         const id = JSON.parse(sessionStorage.getItem("selectedAccount")).id;
         const uid = JSON.parse(sessionStorage.getItem("selectedStream")).uid;
-        sessionStorage.setItem(
-          "streamOutputs",
-          getStreamOutputs(key, id, uid)
-        );
-        sessionStorage.setItem(
-          "streamData",
-          getStreamData(key, id, uid)
-        );
+        getStreamOutputs(key, id, uid);
+        getStreamData(key, id, uid);
       } catch (e) {
         console.error(e);
       }
