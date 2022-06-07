@@ -57,6 +57,7 @@ export function Options() {
             displayName: 'RTMP',
             icon: rtmp,
             content: <Rtmp
+                key={body.result.uid}
                 id={body.result.uid}
                 url={body.result.url}
                 streamKey={body.result.streamKey}
@@ -105,6 +106,7 @@ export function Options() {
                 displayName: 'RTMP',
                 icon: rtmp,
                 content: <Rtmp
+                    key={output.uid}
                     id={output.uid}
                     url={output.url}
                     streamKey={output.streamKey}
@@ -120,7 +122,6 @@ export function Options() {
             icon: cfstream,
             content: <Cloudflare />,
         }, ...out]);
-        console.log(outputs);
     }
 
     function handleTick(){
@@ -180,6 +181,7 @@ export function Options() {
                             displayName: 'RTMP',
                             icon: rtmp,
                             content: <Rtmp
+                                key={counter}
                                 id={counter}
                                 url=""
                                 streamKey=""
