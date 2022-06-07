@@ -61,7 +61,9 @@ export function Preview() {
             ).uid;
             if (key && id && uid) {
               getStreamOutputs(key, id, uid).then((streamOutputs) => {
-                setStreamId(streamOutputs.result[0].uid);
+                if (streamOutputs.result[0].uid !== streamId) {
+                  setStreamId(streamOutputs.result[0].uid);
+                }
                 console.log(streamOutputs);
               });
             }
@@ -97,14 +99,13 @@ export function Preview() {
         </div>
       </div>
       <div className="Preview-content">
-        <Stream muted autoplay responsive src={streamId} />
-        {/*streamingState === "connected" ? (
+        {streamingState === "connected" ? (
             <Stream muted autoplay responsive src={streamId} />
         ) : (
           <div className="notStreaming">
             <p>{streamingState}...</p>
           </div>
-        )*/}
+        )}
       </div>
     </div>
   );
