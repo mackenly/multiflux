@@ -29,7 +29,7 @@ export function Options() {
         },
     ]);
     const [active, setActive] = useState(outputs[0]);
-    const [counter, setCounter] = useState(outputs.length);
+    const [counter, setCounter] = useState(outputs.length + 1);
 
     async function addOutput(urlIn, streamKeyIn) {
         const init = {
