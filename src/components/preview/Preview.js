@@ -68,7 +68,6 @@ export function Preview() {
           }
         }
         setStreamingState(data.result.status.current.state);
-        console.log(data.result.status.current.state);
       } catch (e) {
         console.error(e);
       }
@@ -98,13 +97,14 @@ export function Preview() {
         </div>
       </div>
       <div className="Preview-content">
-        {streamingState === "connected" ? (
-          <Stream controls autoplay responsive src={streamId} />
+        <Stream muted autoplay responsive src={streamId} />
+        {/*streamingState === "connected" ? (
+            <Stream muted autoplay responsive src={streamId} />
         ) : (
           <div className="notStreaming">
             <p>{streamingState}...</p>
           </div>
-        )}
+        )*/}
       </div>
     </div>
   );
