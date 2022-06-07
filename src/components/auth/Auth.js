@@ -416,21 +416,27 @@ function Select(props) {
         <button
           id="Auth-Select-Use"
           onClick={() => {
-            console.log("Stream selected: " + selectedStream);
             try {
+              const streamSelect = JSON.parse(
+                sessionStorage.getItem("selectedStream")
+              );
+              const accountSelect = JSON.parse(
+                sessionStorage.getItem("selectedAccount")
+              );
+              console.log("Stream selected: " + streamSelect);
               if (
-                selectedStream.uid !== undefined &&
-                selectedStream.uid !== null
+                streamSelect.uid !== undefined &&
+                streamSelect.uid !== null
               ) {
                 getStreamData(
                   sessionStorage.getItem("key"),
-                  selectedAccount.id,
-                  selectedStream.uid
+                  accountSelect.id,
+                  streamSelect.uid
                 )
                   .then((streamData) => {
                     getStreamOutputs(
                       sessionStorage.getItem("key"),
-                      selectedAccount.id,
+                      accountSelect.id,
                       selectedStream.uid
                     )
                       .then((streamOutputs) => {
@@ -443,7 +449,7 @@ function Select(props) {
                           JSON.stringify(streamOutputs)
                         );
                         sessionStorage.setItem("isSelecting", false);
-                        window.location.reload();
+                        //window.location.reload();
                       })
                       .catch((err) => {
                         throw Error("Stream outputs failed");
