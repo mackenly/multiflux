@@ -141,7 +141,7 @@ export function Options() {
         return function cleanup() {
             clearInterval(interval);
         }
-    }, [getOutputs(), outputs.length]);
+    }, [outputs.length]);
 
 
 
