@@ -84,7 +84,7 @@ export function Options() {
         } else if (response.status !== 200) {
             throw new Error(body);
         }
-        setOutputs(outputs.filter(output => output.id !== id));
+        getOutputs();
         setActive(outputs[0]);
     }
 
@@ -227,10 +227,10 @@ export function Options() {
                     <img src={ remove } height="30px" title={"Remove " + active.displayName} alt={ "Remove " + active.displayName } onClick={
                         () => {
                             // delete the output
-                            if ( active.id > 1000 ) {
+                            if ( active.id.length < 4 ) {
                                 removeOutput( active.id );
                             } else {
-                                setOutputs( outputs.filter( output => output.id !== active.id ) );
+                                getOutputs();
                             }
                         }
                     } />
@@ -239,7 +239,7 @@ export function Options() {
             <>
                 { active.content }
             </>
-            { active.id < 1000 && active.id !== 1 &&
+            { active.id.length < 4 && active.id !== 1 &&
                 <button onClick={
                     () => {
                         const url = document.getElementById(active.id + "-url").value;
