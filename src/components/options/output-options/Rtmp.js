@@ -12,8 +12,8 @@ import { useState } from 'react';
 import paste from '../../../assets/paste.svg';
 
 export function Rtmp(props) {
-    const [serverValue, setServerValue] = useState(props.server);
-    const [serverKeyValue, setServerKeyValue] = useState(props.serverKey);
+    const [serverValue, setServerValue] = useState("");
+    const [serverKeyValue, setServerKeyValue] = useState("");
     return (
         <div className="Rtmp">
             <div className="Status-indicator">

@@ -12,7 +12,7 @@ import { useState } from 'react';
 import paste from '../../../assets/paste.svg';
 
 export function Srt(props) {
-    const [serverValue, setServerValue] = useState(props.server);
+    const [serverValue, setServerValue] = useState("");
     return (
         <div className="Srt">
             <div className="Status-indicator">

@@ -19,7 +19,7 @@ import add from '../../assets/add.svg';
 import remove from '../../assets/remove.svg';
 
 export function Options(streamData, streamOutputs) {
-    const outputs = [
+    const [outputs, setOutputs] = useState([
         {
             id: 1,
             type: 'cloudflare',
@@ -28,14 +28,9 @@ export function Options(streamData, streamOutputs) {
             content: <Cloudflare 
                 streamData={streamData}
                 streamOutputs={streamOutputs}
-                server="rtmp://rtmp.cloudflarestream.net/" 
-                serverKey="random"
-                saveRecording={true}
-                requireSignedUrls={false}
             />,
         }
-    ];
-
+    ]);
     const [active, setActive] = useState(outputs[0]);
     const [counter, setCounter] = useState(outputs.length);
     return (
@@ -70,11 +65,11 @@ export function Options(streamData, streamOutputs) {
                             displayName: 'RTMP',
                             icon: rtmp,
                             content: <Rtmp
-                                server="rtmp://rtmp.cloudflarestream.net/" 
-                                serverKey="random" 
+                                streamData={streamData}
+                                streamOutputs={streamOutputs}
                             />
                         };
-                        outputs.push( newOutput );
+                        setOutputs( [...outputs, newOutput] );
                         setActive( newOutput );
                     }
                 }>
@@ -91,10 +86,11 @@ export function Options(streamData, streamOutputs) {
                             displayName: 'SRT',
                             icon: srt,
                             content: <Srt
-                                server="rtmp://rtmp.cloudflarestream.net/"
+                                streamData={streamData}
+                                streamOutputs={streamOutputs}
                             />
                         };
-                        outputs.push( newOutput );
+                        setOutputs( [...outputs, newOutput] );
                         setActive( newOutput );
                     }
                 }>

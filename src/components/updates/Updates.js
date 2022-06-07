@@ -1,7 +1,7 @@
 import { Update } from './Update';
 
 const ExampleUpdates = [
-    {
+    /*{
         title: "Stream Started",
         desc: "Recieved a stream from the source.",
         link: "https://www.facebook.com/pg/GoldenRidgeGoalposts/videos/",
@@ -24,7 +24,7 @@ const ExampleUpdates = [
         platform: "cloudflare",
         type: "stream-stopped",
         datetime: "2020-01-01T00:09:00.000Z"
-    }
+    }*/
 ];
 
 export function Updates() {
