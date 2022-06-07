@@ -7,7 +7,7 @@
 // the Business Source License, use of this software will be governed
 // by the GNU AFFERO GENERAL PUBLIC LICENSE 3.0.
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Cloudflare } from "./output-options/Cloudflare";
 import { Rtmp } from "./output-options/Rtmp";
 import { Srt } from "./output-options/Srt";
@@ -33,6 +33,53 @@ export function Options(streamData, streamOutputs) {
     ]);
     const [active, setActive] = useState(outputs[0]);
     const [counter, setCounter] = useState(outputs.length);
+
+    async function getOutputs() {
+        const init = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + sessionStorage.getItem('key'),
+                "account-id": JSON.parse(sessionStorage.getItem('selectedAccount')).id,
+            }
+        };
+        const response = await fetch(`/api/streams/live_inputs/${JSON.parse(sessionStorage.getItem("selectedStream")).uid}/outputs`, init);
+        const data = await response.json();
+        const out = data.result.map(output => {
+            return {
+                id: output.uid,
+                type: 'rtmp',
+                displayName: 'RTMP',
+                icon: rtmp,
+                content: <Rtmp
+                    outputData={output}
+                />
+            }
+        }
+        );
+        setOutputs({
+            id: 1,
+            type: 'cloudflare',
+            displayName: 'Cloudflare',
+            icon: cfstream,
+            content: <Cloudflare 
+                streamData={streamData}
+                streamOutputs={streamOutputs}
+            />,
+        }, ...out);
+    }
+
+    useEffect(() => {
+        // update every second
+        const interval = setInterval(() => {
+            try {
+                getOutputs();
+                console.log(outputs);
+            } catch (e) { }
+        }
+        , 1000);
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <div className="Options">
