@@ -27,67 +27,45 @@ function App() {
   const [stream, setStream] = useState(null);
   const [streamData, setStreamData] = useState(null);
   const [streamOutputs, setStreamOutputs] = useState(null);
-  const [streamValid, setStreamValid] = useState(false);
+  const [updated, setUpdated] = useState(false);
 
-  function updateStuff() {
-    var updated = false;
-    if (sessionStorage.getItem("selectedStream") !== undefined) {
-      const selectedStream = JSON.parse(
+  async function updateStuff() {
+    if (sessionStorage.getItem("selectedStream")) {
+      setStream(JSON.parse(
         sessionStorage.getItem("selectedStream")
-      );
-      setStream(selectedStream);
-      updated = true;
+      ));
     }
-    if (sessionStorage.getItem("streamData") !== undefined) {
-      const selectedStreamData = JSON.parse(
+    if (sessionStorage.getItem("streamData")) {
+      setStreamData(JSON.parse(
         sessionStorage.getItem("streamData")
-      );
-      setStreamData(selectedStreamData);
-      updated = updated && true;
+      ));
     }
-    if (sessionStorage.getItem("streamOutputs") !== undefined) {
-      const selectedStreamOutputs = JSON.parse(
+    if (sessionStorage.getItem("streamOutputs")) {
+      setStreamOutputs(JSON.parse(
         sessionStorage.getItem("streamOutputs")
-      );
-      setStreamOutputs(selectedStreamOutputs);
-      updated = updated && true;
+      ));
     }
-    console.log(stream, streamData, streamOutputs);
-    return updated;
+    if (stream !== null && streamData !== null && streamOutputs !== null) {
+      console.log(stream, streamData, streamOutputs);
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  // check every second for updates
   useEffect(() => {
-    const interval = setInterval(() => {
-      const check = updateStuff();
-      if (check) {
-        console.log("updated");
-        setStreamValid(true);
-      } else {
-        setStreamValid(false);
-      }
-    }
-    , 1000);
-  }
-  , []);
+    updateStuff();
+  }, [updated]);
 
   return (
     <div className="App">
       <Auth />
       <Header className="App-header" />
       <main className="App-body">
-        { streamValid && stream !== null && streamData !== null && streamOutputs !== null ? (
-          <>
-            <Preview streamData={streamData} streamOutputs={streamOutputs} />
-            <Options streamData={streamData} streamOutputs={streamOutputs} />
-            <Chat />
-            <Updates />
-          </>
-        ) : (
-          <div className="App-loading">
-            <p>Loading...</p>
-          </div>
-        )}
+        <Preview streamData={streamData} streamOutputs={streamOutputs} />
+        <Options streamData={streamData} streamOutputs={streamOutputs} />
+        <Chat />
+        <Updates />
       </main>
       <footer className="App-footer">
         <Footer />
