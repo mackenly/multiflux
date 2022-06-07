@@ -36,7 +36,7 @@ function App() {
       },
     };
     const response = await fetch(
-      `/api/streams/live_inputs/${streamId}/videos`,
+      `/api/streams/live_inputs/${streamId}/outputs`,
       init
     );
     const body = await response.json();
@@ -75,14 +75,14 @@ function App() {
       try {
         const updatedStreamOutputs = getStreamOutputs(
           sessionStorage.getItem("key"),
-          JSON.parse(sessionStorage.getItem("selectedAccount")).uid,
-          JSON.parse(sessionStorage.getItem("selectedStream")).id
+          JSON.parse(sessionStorage.getItem("selectedAccount")).id,
+          JSON.parse(sessionStorage.getItem("selectedStream")).uid
         );
         sessionStorage.setItem("streamOutputs", JSON.stringify(updatedStreamOutputs));
         const updatedStreamData = getStreamData(
           sessionStorage.getItem("key"),
           JSON.parse(sessionStorage.getItem("selectedAccount")).id,
-          JSON.parse(sessionStorage.getItem("selectedAccount")).uid
+          JSON.parse(sessionStorage.getItem("selectedStream")).uid
         );
         sessionStorage.setItem("streamData", JSON.stringify(updatedStreamData));
       } catch (e) {}
