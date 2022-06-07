@@ -42,13 +42,23 @@ export function Preview() {
   }
 
   useEffect(() => {
-    const key = sessionStorage.getItem("key");
-    const id = JSON.parse(sessionStorage.getItem("selectedAccount")).id;
-    const uid = JSON.parse(sessionStorage.getItem("selectedStream")).uid;
-    if (key && id && uid) {
-      getStreamOutputs(key, id, uid).then((streamOutputs) => {
-        setStreamId(streamOutputs.result[0].uid);
-      });
+    try {
+      if (
+        sessionStorage.getItem("key") !== null &&
+        sessionStorage.getItem("selectedAccount") !== null &&
+        sessionStorage.getItem("selectedStream") !== null
+      ) {
+        const key = sessionStorage.getItem("key");
+        const id = JSON.parse(sessionStorage.getItem("selectedAccount")).id;
+        const uid = JSON.parse(sessionStorage.getItem("selectedStream")).uid;
+        if (key && id && uid) {
+          getStreamOutputs(key, id, uid).then((streamOutputs) => {
+            setStreamId(streamOutputs.result[0].uid);
+          });
+        }
+      }
+    } catch (error) {
+      console.log(error);
     }
   }, [streamingState]);
 
