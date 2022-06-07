@@ -51,6 +51,7 @@ function App() {
 
   useEffect(() => {
     updateStuff();
+    console.log(stream, streamData, streamOutputs);
   });
   return (
     <div className="App">
