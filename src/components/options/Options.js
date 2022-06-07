@@ -227,7 +227,11 @@ export function Options() {
                     <img src={ remove } height="30px" title={"Remove " + active.displayName} alt={ "Remove " + active.displayName } onClick={
                         () => {
                             // delete the output
-                            removeOutput( active.id );
+                            if (active.id.toString() !== '1' && active.id.toString().length < 4) {
+                                getOutputs();
+                            } else {
+                                removeOutput(active.id);
+                            }
                         }
                     } />
                 }
