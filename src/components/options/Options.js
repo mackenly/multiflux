@@ -64,8 +64,8 @@ export function Options() {
                 status={body.result.status}
             />
         }]);
+        setActive(outputs[0]);
         getOutputs();
-        setActive(outputs[outputs.length - 1]);
     }
 
     async function removeOutput(id) {
@@ -244,7 +244,11 @@ export function Options() {
                     () => {
                         const url = document.getElementById(active.id + "-url").value;
                         const streamKey = document.getElementById(active.id + "-key").value;
-                        addOutput( url, streamKey );
+                        try {
+                            addOutput(url, streamKey);
+                        } catch (e) {
+                            console.error(e);
+                        }
                     }
                 }
             >Add Output</button>
