@@ -27,7 +27,8 @@ function App() {
   const [stream, setStream] = useState(null);
   const [streamData, setStreamData] = useState(null);
   const [streamOutputs, setStreamOutputs] = useState(null);
-  useEffect(() => {
+
+  function updateStuff() {
     if (sessionStorage.getItem("selectedStream")) {
       const selectedStream = JSON.parse(
         sessionStorage.getItem("selectedStream")
@@ -55,6 +56,11 @@ function App() {
         }
       }
     }
+  }
+  updateStuff();
+
+  useEffect(() => {
+    updateStuff();
   }, [stream, streamData, streamOutputs]);
   return (
     <div className="App">
