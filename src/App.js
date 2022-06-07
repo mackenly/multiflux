@@ -29,19 +29,19 @@ function App() {
   const [streamOutputs, setStreamOutputs] = useState(null);
 
   function updateStuff() {
-    if (sessionStorage.getItem("selectedStream")) {
+    if (sessionStorage.getItem("selectedStream") !== undefined) {
       const selectedStream = JSON.parse(
         sessionStorage.getItem("selectedStream")
       );
       setStream(selectedStream);
     }
-    if (sessionStorage.getItem("streamData")) {
+    if (sessionStorage.getItem("streamData") !== undefined) {
       const selectedStreamData = JSON.parse(
         sessionStorage.getItem("streamData")
       );
       setStreamData(selectedStreamData);
     }
-    if (sessionStorage.getItem("streamOutputs")) {
+    if (sessionStorage.getItem("streamOutputs") !== undefined) {
       const selectedStreamOutputs = JSON.parse(
         sessionStorage.getItem("streamOutputs")
       );
