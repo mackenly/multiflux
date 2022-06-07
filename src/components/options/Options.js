@@ -117,6 +117,7 @@ export function Options() {
             icon: cfstream,
             content: <Cloudflare />,
         }, ...out]);
+        console.log(outputs);
     }
 
     useEffect(() => {
@@ -124,10 +125,9 @@ export function Options() {
         const interval = setInterval(() => {
             try {
                 getOutputs();
-                console.log(outputs);
             } catch (e) { }
         }
-        , 10000);
+        , 5000);
         return () => clearInterval(interval);
     }, []);
 
