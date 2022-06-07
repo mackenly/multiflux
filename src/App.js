@@ -29,7 +29,7 @@ function App() {
   const [streamOutputs, setStreamOutputs] = useState(null);
 
   function updateStuff() {
-    const updated = false;
+    var updated = false;
     if (sessionStorage.getItem("selectedStream") !== undefined) {
       const selectedStream = JSON.parse(
         sessionStorage.getItem("selectedStream")
@@ -74,7 +74,7 @@ function App() {
       <Auth />
       <Header className="App-header" />
       <main className="App-body">
-        { streamData !== null && streamOutputs !== null ? (
+        { stream !== null && streamData !== null && streamOutputs !== null ? (
           <>
             <Preview streamData={streamData} streamOutputs={streamOutputs} />
             <Options streamData={streamData} streamOutputs={streamOutputs} />
