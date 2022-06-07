@@ -31,7 +31,7 @@ export function Options() {
     const [active, setActive] = useState(outputs[0]);
     const [counter, setCounter] = useState(outputs.length);
 
-    async function addOutput(url, streamKey) {
+    async function addOutput(urlIn, streamKeyIn) {
         const init = {
             method: 'POST',
             headers: {
@@ -40,8 +40,8 @@ export function Options() {
                 "account-id": JSON.parse(sessionStorage.getItem('selectedAccount')).id,
             },
             body: JSON.stringify({
-                url: url,
-                streamKey: streamKey,
+                url: urlIn,
+                streamKey: streamKeyIn,
             }),
         };
         const response = await fetch(`/api/streams/live_inputs/${JSON.parse(sessionStorage.getItem("selectedStream")).uid}/outputs`, init);
@@ -60,6 +60,7 @@ export function Options() {
                 id={body.result.uid}
                 url={body.result.url}
                 streamKey={body.result.streamKey}
+                status={body.result.status}
             />
         }]);
         setActive(outputs[outputs.length - 1]);
@@ -106,6 +107,7 @@ export function Options() {
                     id={output.uid}
                     url={output.url}
                     streamKey={output.streamKey}
+                    status={output.status}
             />
             }
         }
@@ -230,6 +232,14 @@ export function Options() {
             <>
                 { active.content }
             </>
+            <button onClick={
+                    () => {
+                        const url = document.getElementById(active.id + "-url").value;
+                        const streamKey = document.getElementById(active.id + "-key").value;
+                        addOutput( url, streamKey );
+                    }
+                }
+            >Add Output</button>
         </div>
     )
 }

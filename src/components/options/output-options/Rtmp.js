@@ -10,24 +10,28 @@
 import { useState, useEffect } from 'react';
 
 import paste from '../../../assets/paste.svg';
+import { Options } from '../Options';
 
 export function Rtmp(props) {
     const [serverValue, setServerValue] = useState(props.url);
-    const [serverKeyValue, setServerKeyValue] = useState(props.streamKey);
+    const [serverKeyValue, setServerKeyValue] = useState(props.Key);
 
     return (
         <div className="Rtmp">
-            <div className="Status-indicator">
-                <svg height="12" width="12">
-                    <circle cx="6" cy="6" r="6" fill="red" />
-                </svg>
-                <p>Disconnected</p>
-            </div>
+            { props.status === null ?
+                <div className="Status-indicator">
+                    <svg height="12" width="12">
+                        <circle cx="6" cy="6" r="6" fill="red" />
+                    </svg>
+                    <p>Not Connected</p>
+                </div>
+            : null 
+            }
             <p>Paste your RTMP server information below.</p>
             <div className="Rtmp-server-data">
                 <label>Server:</label><br />
                 <div className='Rtmp-server-data-server'>
-                    <input type="url" value={ serverValue } onChange={ (e) => { setServerValue(e.target.value) } } />
+                    <input type="url" id={props.id + '-url'} value={ serverValue } onChange={ (e) => { setServerValue(e.target.value) } } />
                     <img src={ paste } height="18x" alt="Paste from clipboard" onClick={() => {
                         navigator.clipboard.readText().then(text => {
                             setServerValue(text.trim());
@@ -41,7 +45,7 @@ export function Rtmp(props) {
                 <span id='server-pasted'>Pasted 👽</span><br />
                 <label>Stream Key:</label><br />
                 <div className='Rtmp-server-data-key'>
-                    <input type="password" value={ serverKeyValue } onChange={ (e) => { 
+                    <input type="password" id={props.id + '-key'} value={ serverKeyValue } onChange={ (e) => { 
                         setServerKeyValue(e.target.value);
                         e.target.type = 'text';
                         setTimeout(() => {
