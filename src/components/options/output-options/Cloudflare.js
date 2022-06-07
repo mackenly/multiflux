@@ -8,12 +8,25 @@
 // by the GNU AFFERO GENERAL PUBLIC LICENSE 3.0.
 
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import copy from '../../../assets/copy.svg';
 
 export function Cloudflare(props) {
     const [server, setServer] = useState("");
     const [serverKey, setServerKey] = useState("");
+
+    useEffect(() => {
+        // update every second
+        const interval = setInterval(() => {
+            try {
+                const data = JSON.parse(sessionStorage.getItem("streamData")).result;
+                setServer(data.meta.name);
+                const data2 = JSON.parse(sessionStorage.getItem("streamOutputs")).result[0];
+                setServerKey(data2.uid);
+            } catch (e) {}
+        }
+        , 1000);
+        return () => clearInterval(interval);
+    }, []);
 
     useEffect(() => {
         if (props.streamData.result) {
@@ -57,9 +70,4 @@ export function Cloudflare(props) {
             </div>
         </div>
     )
-}
-
-Cloudflare.propTypes = {
-    streamData: PropTypes.object.isRequired,
-    streamOutputs: PropTypes.object.isRequired,
 }

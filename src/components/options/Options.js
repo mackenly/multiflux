@@ -33,6 +33,7 @@ export function Options(streamData, streamOutputs) {
     ]);
     const [active, setActive] = useState(outputs[0]);
     const [counter, setCounter] = useState(outputs.length);
+
     return (
         <div className="Options">
             <h2>Options and Outputs</h2>
