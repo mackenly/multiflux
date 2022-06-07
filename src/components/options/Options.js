@@ -142,10 +142,7 @@ export function Options() {
             clearInterval(interval);
         }
     }, [getOutputs(), outputs.length]);
-    
-    useEffect(() => {
-        getOutputs();
-    }, [outputs]);
+
 
 
     return (
