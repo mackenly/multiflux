@@ -84,8 +84,8 @@ export function Options() {
         } else if (response.status !== 200) {
             throw new Error(body);
         }
-        getOutputs();
         setActive(outputs[0]);
+        getOutputs();
     }
 
     async function getOutputs() {
@@ -227,11 +227,7 @@ export function Options() {
                     <img src={ remove } height="30px" title={"Remove " + active.displayName} alt={ "Remove " + active.displayName } onClick={
                         () => {
                             // delete the output
-                            if ( active.id.length < 4 ) {
-                                removeOutput( active.id );
-                            } else {
-                                getOutputs();
-                            }
+                            removeOutput( active.id );
                         }
                     } />
                 }
@@ -239,7 +235,7 @@ export function Options() {
             <>
                 { active.content }
             </>
-            { active.id.length < 4 && active.id !== 1 &&
+            { active.id < 1000 && active.id !== 1 &&
                 <button onClick={
                     () => {
                         const url = document.getElementById(active.id + "-url").value;
