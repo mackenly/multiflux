@@ -7,7 +7,7 @@
 // the Business Source License, use of this software will be governed
 // by the GNU AFFERO GENERAL PUBLIC LICENSE 3.0.
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Stream } from "@cloudflare/stream-react";
 
 import cfstream from "../../assets/cfstream.svg";
@@ -16,14 +16,10 @@ export function Preview() {
   const [streamName, setStreamName] = useState("");
   const [streamId, setStreamId] = useState("");
   const [streamingState, setStreamingState] = useState("disconnected");
-  const [retryCount, setRetryCount] = useState(0);
-  const videoRef = useRef();
 
-  const playVideo = () => {
-    if (retryCount < 3) {
-      videoRef.current.play();
-    }
-    setRetryCount(retryCount + 1);
+  const videoError = () => {
+    console.error("Video player error");
+    alert("Video player error", "This is a known issue. Try refreshing the page.");
   };
 
   async function getStreamOutputs(key, accountId, streamId) {
@@ -113,7 +109,7 @@ export function Preview() {
               muted
               autoplay
               src={JSON.parse(sessionStorage.getItem("selectedStream")).uid}
-              /*onError={playVideo}*/
+              onError={videoError}
             />
           </div>
         ) : (
