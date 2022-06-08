@@ -100,7 +100,7 @@ export function Preview() {
       <div className="Preview-content">
         {streamingState === "connected" && streamId !== "" ? (
             <div>
-            <Stream controls src={JSON.parse(
+            <Stream controls muted autoplay src={JSON.parse(
                 sessionStorage.getItem("selectedStream")
               ).uid} />
           </div>
