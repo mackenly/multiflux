@@ -25,6 +25,8 @@ Multiflux allows anyone to deploy the project onto their own Cloudlfare account 
 - [x] Add support for multiple stream outputs
 - [ ] Add support for SRT ingest
 - [ ] Add support for SRT egress
+- [ ] Add support for directly egressing to social media detonations using their respective APIs
+- [ ] Add support for sending meta data to social media detonations
 - [ ] Show embed codes for streams
 - [ ] Add support for editing stream settings
 - [ ] Add chat messaging synced with Twitch, YouTube, and other services
