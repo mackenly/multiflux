@@ -323,6 +323,7 @@ export function Options() {
       <>{active.content}</>
       {active.id.toString() !== "1" && active.id.toString().length < 4 && (
         <button
+          className="Options-change-button"
           onClick={() => {
             const url = document.getElementById(active.id + "-url").value;
             const streamKey = document.getElementById(active.id + "-key").value;
@@ -338,6 +339,7 @@ export function Options() {
       )}
       {active.id.toString().length > 3 && (
         <button
+          className="Options-change-button"
           onClick={() => {
             const oldId = active.id;
             const url = document.getElementById(active.id + "-url").value;

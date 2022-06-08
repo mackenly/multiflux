@@ -9,7 +9,6 @@
   * by the GNU AFFERO GENERAL PUBLIC LICENSE 3.0.
 */
 
-
 .Options-outputs {
   display: flex;
 }
@@ -125,13 +124,17 @@
   font-size: calc(4px + 1vmin);
 }
 
-.Cloudflare-server-data label, .Rtmp-server-data label, .Srt-server-data label {
+.Cloudflare-server-data label,
+.Rtmp-server-data label,
+.Srt-server-data label {
   display: inline-block;
   margin: 10px 0px;
   font-weight: 700;
 }
 
-.Cloudflare-server-data input, .Rtmp-server-data input, .Srt-server-data input {
+.Cloudflare-server-data input,
+.Rtmp-server-data input,
+.Srt-server-data input {
   flex-grow: 1;
   padding: 10px;
   background-color: transparent;
@@ -163,7 +166,9 @@
   padding: 0px 5px;
 }
 
-.Cloudflare-server-data span, .Rtmp-server-data span, .Srt-server-data span {
+.Cloudflare-server-data span,
+.Rtmp-server-data span,
+.Srt-server-data span {
   opacity: 0;
   padding-right: 5px;
   font-weight: 200;
@@ -178,4 +183,15 @@
 
 .Cloudflare-options-allowed-origin {
   border: none;
+}
+
+.Options-change-button {
+  width: fit-content;
+  padding: 8px 20px;
+  background-color: var(--content-link-color);
+  border: none;
+  color: var(--content-body-color);
+  font-weight: 700;
+  border-radius: 5px;
+  cursor: pointer;
 }
