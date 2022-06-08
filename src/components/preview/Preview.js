@@ -99,7 +99,17 @@ export function Preview() {
       </div>
       <div className="Preview-content">
         {streamingState === "connected" && streamId !== "" ? (
-          <div className="videoPlayer">
+            <div>
+            <Stream controls src={JSON.parse(
+                sessionStorage.getItem("selectedStream")
+              ).uid} />
+          </div>
+        ) : (
+          <div className="notStreaming">
+            <p>{streamingState}...</p>
+          </div>
+        )}
+        {/*<div className="videoPlayer">
             <iframe
               title="Stream Preview"
               src={`https://iframe.videodelivery.net/${JSON.parse(
@@ -108,12 +118,7 @@ export function Preview() {
               allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
               allowfullscreen="true"
             ></iframe>
-          </div>
-        ) : (
-          <div className="notStreaming">
-            <p>{streamingState}...</p>
-          </div>
-        )}
+          </div>*/}
       </div>
     </div>
   );
