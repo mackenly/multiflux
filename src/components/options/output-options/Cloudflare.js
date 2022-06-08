@@ -10,7 +10,7 @@
 import { useState, useEffect } from 'react';
 import copy from '../../../assets/copy.svg';
 
-export function Cloudflare(props) {
+export function Cloudflare() {
     const [server, setServer] = useState("");
     const [serverKey, setServerKey] = useState("");
 

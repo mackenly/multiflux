@@ -24,6 +24,67 @@ import "./components/updates/Updates.css";
 import "./components/preview/Preview.css";
 
 function App() {
+  async function getStreamOutputs(key, accountId, streamId) {
+    const init = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${key}`,
+        "account-id": `${accountId}`,
+        Accept: "application/json",
+      },
+    };
+    const response = await fetch(
+      `/api/streams/live_inputs/${streamId}/outputs`,
+      init
+    );
+    const body = await response.json();
+    if (response.status === 401) {
+      throw new Error("Unauthorized");
+    } else if (response.status !== 200) {
+      throw new Error(body.errors[0].message);
+    }
+    sessionStorage.setItem("streamOutputs", JSON.stringify(body));
+    return body;
+  }
+
+  async function getStreamData(key, accountId, streamId) {
+    const init = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${key}`,
+        "account-id": `${accountId}`,
+        Accept: "application/json",
+      },
+    };
+    const response = await fetch(`/api/streams/live_inputs/${streamId}`, init);
+    const body = await response.json();
+    if (response.status === 401) {
+      throw new Error("Unauthorized");
+    } else if (response.status !== 200) {
+      throw new Error(body.errors[0].message);
+    }
+    sessionStorage.setItem("streamData",JSON.stringify(body));
+    return body;
+  }
+  // List outputs, Live input details
+
+  useEffect(() => {
+    // update every 5 seconds
+    const interval = setInterval(() => {
+      try {
+        const key = sessionStorage.getItem("key");
+        const id = JSON.parse(sessionStorage.getItem("selectedAccount")).id;
+        const uid = JSON.parse(sessionStorage.getItem("selectedStream")).uid;
+        getStreamOutputs(key, id, uid);
+        getStreamData(key, id, uid);
+      } catch (e) {
+        console.error(e);
+      }
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="App">
