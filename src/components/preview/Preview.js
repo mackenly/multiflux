@@ -98,7 +98,7 @@ export function Preview() {
         </div>
       </div>
       <div className="Preview-content">
-        {streamingState === "connected" ? (
+        {streamingState === "connected" && streamId !== "" ? (
           <div className="videoPlayer">
             <iframe
               title="Stream Preview"
