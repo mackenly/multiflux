@@ -102,7 +102,9 @@ export function Preview() {
           <div className="videoPlayer">
             <iframe
               title="Stream Preview"
-              src={`https://iframe.videodelivery.net/${streamId}`}
+              src={`https://iframe.videodelivery.net/${JSON.parse(
+                sessionStorage.getItem("selectedStream")
+              ).uid}`}
               allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
               allowfullscreen="true"
             ></iframe>
