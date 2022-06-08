@@ -16,11 +16,15 @@ export function Preview() {
   const [streamName, setStreamName] = useState("");
   const [streamId, setStreamId] = useState("");
   const [streamingState, setStreamingState] = useState("disconnected");
+  const [retryCount, setRetryCount] = useState(0);
   const videoRef = useRef();
 
   const playVideo = () => {
-    videoRef.current.play();
-    };
+    if (retryCount < 3) {
+      videoRef.current.play();
+    }
+    setRetryCount(retryCount + 1);
+  };
 
   async function getStreamOutputs(key, accountId, streamId) {
     const init = {
@@ -103,12 +107,14 @@ export function Preview() {
       </div>
       <div className="Preview-content">
         {streamingState === "connected" && streamId !== "" ? (
-            <div>
-            <Stream controls muted autoplay src={JSON.parse(
-                sessionStorage.getItem("selectedStream")
-              ).uid} onError={(e) => 
-                playVideo()
-              } />
+          <div>
+            <Stream
+              controls
+              muted
+              autoplay
+              src={JSON.parse(sessionStorage.getItem("selectedStream")).uid}
+              onError={playVideo}
+            />
           </div>
         ) : (
           <div className="notStreaming">
