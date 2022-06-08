@@ -102,7 +102,9 @@ export function Preview() {
             <div>
             <Stream controls muted autoplay src={JSON.parse(
                 sessionStorage.getItem("selectedStream")
-              ).uid} />
+              ).uid} onError={
+                (e) => console.error(e)
+              } />
           </div>
         ) : (
           <div className="notStreaming">
