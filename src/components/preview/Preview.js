@@ -19,7 +19,7 @@ export function Preview() {
 
   const videoError = () => {
     console.error("Video player error");
-    alert("Video player error", "This is a known issue. Try refreshing the page.");
+    alert("Video player error - Try refreshing the page.");
   };
 
   async function getStreamOutputs(key, accountId, streamId) {
