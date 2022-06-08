@@ -113,7 +113,7 @@ export function Preview() {
               muted
               autoplay
               src={JSON.parse(sessionStorage.getItem("selectedStream")).uid}
-              onError={playVideo}
+              /*onError={playVideo}*/
             />
           </div>
         ) : (
