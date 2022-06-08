@@ -7,16 +7,20 @@
 // the Business Source License, use of this software will be governed
 // by the GNU AFFERO GENERAL PUBLIC LICENSE 3.0.
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Stream } from "@cloudflare/stream-react";
 
 import cfstream from "../../assets/cfstream.svg";
-import colorbars from "../../assets/colorbars.png";
 
 export function Preview() {
   const [streamName, setStreamName] = useState("");
   const [streamId, setStreamId] = useState("");
   const [streamingState, setStreamingState] = useState("disconnected");
+  const videoRef = useRef();
+
+  const playVideo = () => {
+    videoRef.current.play();
+    };
 
   async function getStreamOutputs(key, accountId, streamId) {
     const init = {
@@ -102,8 +106,8 @@ export function Preview() {
             <div>
             <Stream controls muted autoplay src={JSON.parse(
                 sessionStorage.getItem("selectedStream")
-              ).uid} onError={
-                (e) => console.error(e)
+              ).uid} onError={(e) => 
+                playVideo()
               } />
           </div>
         ) : (
