@@ -17,16 +17,16 @@ This project utilizes the [Cloudflare Workers](https://www.cloudflare.com/worker
 - [Contributing](README.md#contributing)
 
 ## Purpose:
-Multistreaming can be costly and complicated. Services such as Restream™ and Castr™ provide most of the features users need but don't give you the same flexibility, customizability, or cost savings as self deployed solutions. Other solutions do exist, such as configuring a NGINX server to redistribute incoming streams, but that requires heavy knowlege of config files and leaves much to be desired when it comes to user firendlyness.
+Multistreaming can be costly and complicated. Services such as Restream™ and Castr™ provide most of the features users need but don't give you the same flexibility, customizability, or cost savings as self deployed solutions. Other solutions do exist, such as configuring a NGINX server to redistribute incoming streams, but that requires heavy knowledge of config files and leaves much to be desired when it comes to user friendliness.
 
-Multiflux allows anyone to deploy the project onto their own Cloudlfare account and utilize their Workers, Pages, KV, and Stream services for as little as $10/m.
+Multiflux allows anyone to deploy the project onto their own Cloudflare account and utilize their Workers, Pages, KV, and Stream services for as little as $10/m.
 
 ## Features and Roadmap:
 - [x] Add support for multiple stream outputs
 - [ ] Add support for SRT ingest
 - [ ] Add support for SRT egress
-- [ ] Add support for directly egressing to social media detonations using their respective APIs
-- [ ] Add support for sending meta data to social media detonations
+- [ ] Add support for directly egressing to social media destinations using their respective APIs
+- [ ] Add support for sending meta data to social media destinations
 - [ ] Show embed codes for streams
 - [ ] Add support for editing stream settings
 - [ ] Add chat messaging synced with Twitch, YouTube, and other services
