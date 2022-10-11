@@ -2,7 +2,7 @@
 Cloud Multistreaming Platform Powered by Cloudflare Workers
 
 **Alert**
-This project is in development and may be unstable/buggy. Also, you'll need an API token from your cloudflare account to use it.
+🛑 This project is in development and may be unstable/buggy. Also, you'll need an API token from your cloudflare account to use it. **I'm currently waiting on Cloudflare D1 to release in order to take advantage of the database features that will be required for many of the planned features.**
 
 This project utilizes the [Cloudflare Workers](https://www.cloudflare.com/workers/), [Cloudflare Pages](https://pages.cloudflare.com/) and [Cloudflare Stream](https://www.cloudflare.com/products/cloudflare-stream/) APIs to create a multistreaming platform that can be self hosted on the edge.
 
