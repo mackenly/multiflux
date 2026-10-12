@@ -23,6 +23,32 @@ async function gatherResponse(response) {
 }
 
 /**
+ * verify checks that the Authorization header on the incoming request is a valid,
+ * authenticated CloudFlare API token before any downstream request is made.
+ * @param {*} request Contains the request object from the incoming request.
+ */
+async function verify(request) {
+  const { headers } = request;
+  const init = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${headers.get("Authorization")}`,
+      Accept: "application/json",
+    },
+  };
+  const response = await fetch(
+    "https://api.cloudflare.com/client/v4/user/tokens/verify",
+    init
+  );
+  const body = await gatherResponse(response);
+  if (response.status !== 200) {
+    throw new Error("Unauthorized");
+  }
+  return body;
+}
+
+/**
  * Handle a request to the accounts endpoint by sending a get accounts request to the CloudFlare API.
  * @param {*} request Contains the request object from the incoming request.
  * @returns The response to the request.
@@ -30,6 +56,8 @@ async function gatherResponse(response) {
 async function handleRequest(request) {
   const { headers } = request;
   try {
+    // ensure the request is authenticated before contacting the CloudFlare API
+    await verify(request);
     // get accounts
     const init = {
       method: "GET",
