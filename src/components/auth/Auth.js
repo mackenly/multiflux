@@ -66,8 +66,9 @@ function Login(props) {
 
   const handleLogin = async (key) => {
     try {
-      if (key === "") {
-        throw Error("Please enter a key");
+      key = key.trim();
+      if (key === "" || !/^[A-Za-z0-9_-]{1,200}$/.test(key)) {
+        throw Error("Please enter a valid key");
       }
       const init = {
         method: "GET",
